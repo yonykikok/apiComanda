@@ -6,10 +6,10 @@ class AuthMiddleware extends TokenValidatorMiddleware
 {
   public static function IsLoggedIn($request, $response, $next)
   {
-    var_dump($request);
     if(parent::IsValidToken($request))
       return $next($request, $response);
     else
+    var_dump($request);
       return $response->withJson("not logged in", 401);
   }
 }
