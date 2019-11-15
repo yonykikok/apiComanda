@@ -24,7 +24,7 @@ class TokenValidatorMiddleware
 
       if(!JWTAuth::VerifyToken($token))
       { 
-        var_dump($request->getHeaders()["HTTP_TOKEN"]);
+      //  var_dump($request->getHeaders()["HTTP_TOKEN"]);
         return false;
       }
       
