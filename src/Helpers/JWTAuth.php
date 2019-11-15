@@ -45,8 +45,7 @@ class JWTAuth
       
       //  var_dump($request->getHeaders()["HTTP_TOKEN"]);
       $decoded = JWT::decode($token, self::$key, self::$encryption);
-      var_dump($decoded);
-      var_dump("HOLA");
+    
     }
     catch(\Exception $e)
     {
@@ -56,6 +55,9 @@ class JWTAuth
     //compare audits
     if($decoded->aud !== self::Aud())
       return false;
+    
+      var_dump($decoded);
+      var_dump("SEP");
       //throw new Exception("mismatched audits");
 
     return true;
