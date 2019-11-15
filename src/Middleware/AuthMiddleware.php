@@ -9,7 +9,7 @@ class AuthMiddleware extends TokenValidatorMiddleware
     if(parent::IsValidToken($request))
       return $next($request, $response);
     else
-    var_dump($request);
+    //var_dump($request);
       return $response->withJson("not logged in", 401);
   }
 }
