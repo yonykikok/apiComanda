@@ -42,9 +42,11 @@ class JWTAuth
     //try decode it
     try
     {
-      var_dump($token);
+      
       //  var_dump($request->getHeaders()["HTTP_TOKEN"]);
       $decoded = JWT::decode($token, self::$key, self::$encryption);
+      var_dump($decoded);
+      var_dump("HOLA");
     }
     catch(\Exception $e)
     {
