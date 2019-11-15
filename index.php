@@ -11,6 +11,14 @@ $config = ['settings' => ['displayErrorDetails' => true]];
 
 $app = new \Slim\App($config);
 
+$app->add(function ($req, $res, $next) {
+    $response = $next($req, $res);
+    return $response
+            ->withHeader('Access-Control-Allow-Origin', '*')
+             ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+             ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+});
+
 $capsule = new Capsule;
 $capsule->addConnection(AppConfig::$illuminateDb);
 $capsule->setAsGlobal();
@@ -37,11 +45,5 @@ $cerveceroRoutes($app);
 $bartenderRoutes = require __DIR__.'/src/Routes/Bartender/BartenderRoutes.php';
 $bartenderRoutes($app);
 
-$app->add(function ($req, $res, $next) {
-    $response = $next($req, $res);
-    return $response
-            ->withHeader('Access-Control-Allow-Origin', '*')
-             ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
-             ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
-});
+
 $app->run();
