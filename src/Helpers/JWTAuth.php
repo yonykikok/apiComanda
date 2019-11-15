@@ -54,10 +54,13 @@ class JWTAuth
 
     //compare audits
     if($decoded->aud !== self::Aud())
-      return false;
-    
-      var_dump($decoded);
+    {
+       var_dump($decoded->aud);
       var_dump("SEP");
+      var_dump(self::Aud());
+     
+      return false;
+    }
       //throw new Exception("mismatched audits");
 
     return true;
