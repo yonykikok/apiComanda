@@ -67,6 +67,7 @@ class MozosController //implements IController
 
   public static function TomarPedido($request, $response, $args)
   {
+    $var_dump($request);
     $datosMozo=TokenValidatorMiddleware::GetTokenData($request);//obtengo los datos del mozo que toma el pedido
     $ordenCompleta=$request->getParsedBody();//obtengo la orden completa del cliente
     if(self::SeguirConElPedido($ordenCompleta))//verifica que esten todos los campos obligatorios
