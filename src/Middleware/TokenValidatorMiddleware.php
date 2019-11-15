@@ -13,6 +13,7 @@ class TokenValidatorMiddleware
 
   public static function IsValidToken($request)
   {
+    var_dump($request->getHeaders()["HTTP_TOKEN"]));
     if(!isset($request->getHeaders()["HTTP_TOKEN"]))
     {
       return false;
