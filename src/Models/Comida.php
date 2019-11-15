@@ -4,7 +4,7 @@ namespace Models;
 use Helpers\AppConfig as Config;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Capsule\Manager as Capsule;
-use Models\PedidoComida;
+use Models\pedidoComida;
 class Comida extends Model
 {
   protected $table = "menucomidas";
@@ -69,7 +69,7 @@ class Comida extends Model
       else{
         if(self::VerificarExistencia($listado['id']))
         {
-          $comida=new PedidoComida;
+          $comida=new Pedidocomida;
           $comida->cantidad=$listado['cantidad'];
           $comida->idComida=$listado['id'];
           $comida->orden=$numeroDeOrden;  
@@ -85,7 +85,7 @@ class Comida extends Model
     }
     else
       {
-        $comida=new PedidoComida;
+        $comida=new Pedidocomida;
         $comida->cantidad=0;
         $comida->idComida=1000;
         $comida->orden=$numeroDeOrden;  
