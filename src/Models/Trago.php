@@ -82,7 +82,7 @@ class Trago extends Model
     }
     else
       {
-        $trago=new Pedidotrago;
+        $trago=new PedidoTrago;
         $trago->cantidad=0;
         $trago->idTrago=1000;
         $trago->orden=$numeroDeOrden;  
