@@ -13,7 +13,7 @@ class TokenValidatorMiddleware
 
   public static function IsValidToken($request)
   {
-    var_dump($request->getHeaders()["HTTP_TOKEN"]);
+   
     if(!isset($request->getHeaders()["HTTP_TOKEN"]))
     {
       return false;
@@ -26,6 +26,7 @@ class TokenValidatorMiddleware
       {
         return false;
       }
+       var_dump($request->getHeaders()["HTTP_TOKEN"]);
       //valid token at this point
       //var_dump(JWTAuth::GetData($token));
     }
