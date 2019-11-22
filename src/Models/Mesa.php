@@ -22,7 +22,7 @@ class Mesa extends Model
     {
       echo 'No hay mesas '.$ubicacion.' de '.$cantPersonas.' asientos disponible<br>';
       $mesa=Mesa::where('asientos','>',$cantPersonas)->where('ubicacion',$ubicacion)->where('estado','libre')->first();
-      if(is_null($mesa))
+    /*  if(is_null($mesa))
       {
         echo "Lo siento, no hay mesas disponible para la cantidad de personas que pide";
       }
@@ -35,7 +35,7 @@ class Mesa extends Model
         {
           echo 'pero se encontro mesa disponible para '.$mesa->asientos.' personas en "'.$mesa->mesa.'"';
         }      
-      }
+      }*/
     }
       return $mesa;
   }

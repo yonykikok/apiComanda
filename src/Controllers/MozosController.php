@@ -67,15 +67,15 @@ class MozosController //implements IController
 
   public static function TomarPedido($request, $response, $args)
   {
-    $var_dump($request);
-   /* $datosMozo=TokenValidatorMiddleware::GetTokenData($request);//obtengo los datos del mozo que toma el pedido
+    $datosMozo=TokenValidatorMiddleware::GetTokenData($request);//obtengo los datos del mozo que toma el pedido
+   // var_dump($datosMozo);
+    
     $ordenCompleta=$request->getParsedBody();//obtengo la orden completa del cliente
     if(self::SeguirConElPedido($ordenCompleta))//verifica que esten todos los campos obligatorios
-    {  
-      if(!self::EsUnPedidoValido($ordenCompleta))//verifica que pida almenos una cosa
-      {      
+    {      
         $numeroDeOrden=self::generarCodigoAlfaNumerico(5);//genero un codigo alfanumerico como numero de orden
         $mesa=Mesa::BuscarMesaDisponible($ordenCompleta['mesa']['ubicacion'],$ordenCompleta['mesa']['asientos']);
+  
         if(!is_null($mesa))
         {     
             echo '<H2>'.$ordenCompleta['cliente']['nombre'].'</H2><H3> Orden de pedido: "'.$numeroDeOrden.'"</H3>';
@@ -99,8 +99,7 @@ class MozosController //implements IController
                 break;
               }      
             }
-            self::mostrarTodosLosPedidos($numeroDeOrden);
-
+            //self::mostrarTodosLosPedidos($numeroDeOrden);
             $pedidoMozo= new PedidoMozo();
             $pedidoMozo->idMozo=$datosMozo->id;
             $pedidoMozo->orden=$numeroDeOrden;
@@ -116,17 +115,16 @@ class MozosController //implements IController
             $cliente->save();
             Mesa::cantidadDeUsosMasMas($mesa['mesa']);
             Mesa::cambiarEstadoMesa($mesa['mesa'],'esperando pedido');    
+        }
+        else
+        {
+          echo "<br>Sin mesas disponible lo sentimos<br>";
+
         }  
-           
-      }
-      else
-      {
-        echo '<br> debe pedir algo';
-      }  
     }
     else{
       echo "<br>complete la orden para seguir<br>";
-    }*/
+    }
   }
   public static function CancelarPedido($request,$response,$args)
   {

@@ -19,7 +19,10 @@ class PedidoTrago extends Model
     $pedidosTrago=PedidoTrago::where("orden",$orden)->get();
     foreach ($pedidosTrago as $indice => $pedido) {
       $trago=Trago::where('id',$pedido->idTrago)->first();
-      $retorno.=$pedido->cantidad.' '.$trago->nombre.'<br>';
+      if(!is_null($trago))
+      {
+        $retorno.=$pedido->cantidad.' '.$trago->nombre.'<br>';
+      } 
     } 
     return $retorno;
   }
@@ -46,8 +49,10 @@ class PedidoTrago extends Model
         foreach ($pedidos as $indice => $pedido) 
         {
           $trago=Trago::where('id',$pedido->idTrago)->first();
-          $precioDelPedido=$trago->precio*$pedido->cantidad;
-          $sumaAPagar=$sumaAPagar+$precioDelPedido;  
+          if (!is_null($trago)) {
+            $precioDelPedido=$trago->precio*$pedido->cantidad;
+            $sumaAPagar=$sumaAPagar+$precioDelPedido;  
+          }
         }
       }
     }

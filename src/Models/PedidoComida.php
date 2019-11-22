@@ -20,7 +20,10 @@ class PedidoComida extends Model
     $pedidosComida=PedidoComida::where("orden",$orden)->get();
     foreach ($pedidosComida as $indice => $pedido) {
       $comida=Comida::where('id',$pedido->idComida)->first();
-      $retorno.=$pedido->cantidad.' '.$comida->nombre.'<br>';
+      if(!is_null($comida))
+      {
+        $retorno.=$pedido->cantidad.' '.$comida->nombre.'<br>';
+      } 
     } 
     return $retorno;
   }
@@ -47,8 +50,11 @@ class PedidoComida extends Model
         foreach ($pedidos as $indice => $pedido) //sin imprimir importe
         {
           $comida=Comida::where('id',$pedido->idComida)->first();
-          $precioDelPedido=$comida->precio*$pedido->cantidad;
-          $sumaAPagar=$sumaAPagar+$precioDelPedido;  
+          if(!is_null($comida))
+          {
+            $precioDelPedido=$comida->precio*$pedido->cantidad;
+            $sumaAPagar=$sumaAPagar+$precioDelPedido;  
+          }
         }
       }
     }

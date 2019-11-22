@@ -19,8 +19,11 @@ class PedidoBebida extends Model
     $pedidosBebida=PedidoBebida::where("orden",$orden)->get();
     foreach ($pedidosBebida as $indice => $pedido) {
       $bebida=Bebida::where('id',$pedido->idBebida)->first();
-      $retorno.=$pedido->cantidad.' '.$bebida->nombre.'<br>';
-    } 
+      if(!is_null($bebida))
+      {
+        $retorno.=$pedido->cantidad.' '.$bebida->nombre.'<br>';
+      } 
+    }
     return $retorno;
   }
   public static function CalcularCostoDelPedido($orden,$bool)
@@ -48,8 +51,11 @@ class PedidoBebida extends Model
         foreach ($pedidos as $indice => $pedido) //sin imprimir
         {
           $bebida=Bebida::where('id',$pedido->idBebida)->first();
-          $precioDelPedido=$bebida->precio*$pedido->cantidad;
-          $sumaAPagar=$sumaAPagar+$precioDelPedido;  
+          if(!is_null($bebida))
+          {
+            $precioDelPedido=$bebida->precio*$pedido->cantidad;
+            $sumaAPagar=$sumaAPagar+$precioDelPedido;  
+          }
         }
       }
     }
