@@ -64,7 +64,7 @@ class MozosController //implements IController
 
   public static function TomarPedido($request, $response, $args)
   {
-    $datosMozo = TokenValidatorMiddleware::GetTokenData($request); //obtengo los datos del mozo que toma el pedido
+    /*$datosMozo = TokenValidatorMiddleware::GetTokenData($request); //obtengo los datos del mozo que toma el pedido
 
     $ordenCompleta = $request->getParsedBody(); //obtengo la orden completa del cliente
 
@@ -109,9 +109,9 @@ class MozosController //implements IController
 
     } else {
       echo "<br>Sin mesas disponible lo sentimos<br>";
-    }
-    $responseObj = ["message" => "PedidoCreado", "PedidoCompleto: " => $pedidoMozo];
-    return $response->withJson(json_encode($responseObj), 200);
+    }*/
+    $responseObj = ["message" => "PedidoCreado", "PedidoCompleto: " => "HOLA"];
+    return $response->withJson($responseObj, 200);
   }
   public static function CancelarPedido($request, $response, $args)
   {
