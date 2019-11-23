@@ -74,7 +74,7 @@ class MozosController //implements IController
      $responseObj = ["message" => "Sin Mesas", "Pedido rechazado: " => $ordenCompleta['mesa']['ubicacion']];
     return $response->withJson($responseObj, 200);
     }
-/*
+
     if (!is_null($mesa)) {
       foreach ($ordenCompleta as $key => $value) {
         switch ($key) {
@@ -115,7 +115,7 @@ class MozosController //implements IController
       Mesa::cambiarEstadoMesa($mesa['mesa'], 'esperando pedido');
     } else {
       echo "<br>Sin mesas disponible lo sentimos<br>";
-    }*/
+    }
     $responseObj = ["message" => "PedidoCreado", "PedidoCompleto: " => "SIN MESA"];
     return $response->withJson($responseObj, 200);
   }
