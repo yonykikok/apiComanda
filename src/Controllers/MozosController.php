@@ -116,8 +116,8 @@ class MozosController //implements IController
     } else {
       echo "<br>Sin mesas disponible lo sentimos<br>";
     }
-    $responseObj = ["message" => "PedidoCreado", "PedidoCompleto: " => "SIN MESA"];
-    return $response->withJson($responseObj, 200);
+    $responseObj = ["message" => "PedidoCreado", "PedidoCompleto: " => $pedidoMozo];
+    return $response->withJson(json_encode($responseObj), 200);
   }
   public static function CancelarPedido($request, $response, $args)
   {
