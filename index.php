@@ -12,11 +12,13 @@ $config = ['settings' => ['displayErrorDetails' => true]];
 $app = new \Slim\App($config);
 
 
-$app->add(function($request, $response, $next){
-    $response = $next($request, $response);
-    return $response->withHeader('Access-Control-Allow-Origin', '*')
-        ->withHeader('Access-Control-Allow-Headers', 'Access-Control-Allow-Origin, X-Requested-With, Authorization, Content-Type, Accept, Origin, token')
-        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+
+$app->add(function ($req, $res, $next) {
+    $res = $res->withHeader('Access-Control-Allow-Origin', '*');
+    $res = $res->withHeader('Access-Control-Allow-Methods', $req->getHeaderLine('Access-Control-Request-Method'));
+    $res = $res->withHeader('Access-Control-Allow-Headers', $req->getHeaderLine('Access-Control-Request-Headers'));
+
+    return $next($req, $res);
 });
 
 $capsule = new Capsule;
