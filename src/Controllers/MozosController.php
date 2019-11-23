@@ -65,9 +65,10 @@ class MozosController //implements IController
   public static function TomarPedido($request, $response, $args)
   {
     $ordenCompleta = $request->getParsedBody(); //obtengo la orden completa del cliente
-/*
+
     $numeroDeOrden = self::generarCodigoAlfaNumerico(5); //genero un codigo alfanumerico como numero de orden
     $mesa = Mesa::BuscarMesaDisponible($ordenCompleta['mesa']['ubicacion'], $ordenCompleta['mesa']['asientos']);
+
     if (!is_null($mesa)) {
       foreach ($ordenCompleta as $key => $value) {
         switch ($key) {
@@ -84,17 +85,15 @@ class MozosController //implements IController
             Trago::ArmarPedido($value, $numeroDeOrden);
             break;
           case 'token':
-            $datosMozo = TokenValidatorMiddleware::GetTokenData($request); //obtengo los datos del mozo que toma el pedido
+            $datosMozo = JWTAuth::GetPayload($value['token']);  //obtengo los datos del mozo que toma el pedido
             break;
           default:
             break;
         }
       }
-      var_dump($datosMozo);
-      
       //self::mostrarTodosLosPedidos($numeroDeOrden);
       $pedidoMozo = new PedidoMozo();
-      $pedidoMozo->idMozo = $datosMozo->id;
+      //$pedidoMozo->idMozo = $datosMozo->id;
       $pedidoMozo->orden = $numeroDeOrden;
       $pedidoMozo->mesa = $mesa->mesa;
       $pedidoMozo->estado = 'en preparacion';
@@ -108,12 +107,11 @@ class MozosController //implements IController
       $cliente->save();
       Mesa::cantidadDeUsosMasMas($mesa['mesa']);
       Mesa::cambiarEstadoMesa($mesa['mesa'], 'esperando pedido');
-
     } else {
       echo "<br>Sin mesas disponible lo sentimos<br>";
-    }*/
-    $responseObj = ["message" => "PedidoCreado", "PedidoCompleto: " => "HOLA"];
-    return $response->withJson($responseObj, 200);
+    }
+    $responseObj = ["message" => "PedidoCreado", "PedidoCompleto: " => $pedidoMozo];
+    return $response->withJson(json_encode($responseObj), 200);
   }
   public static function CancelarPedido($request, $response, $args)
   {
