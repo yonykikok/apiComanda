@@ -68,7 +68,7 @@ class MozosController //implements IController
 
     $numeroDeOrden = self::generarCodigoAlfaNumerico(5); //genero un codigo alfanumerico como numero de orden
     $mesa = Mesa::BuscarMesaDisponible($ordenCompleta['mesa']['ubicacion'], $ordenCompleta['mesa']['asientos']);
-
+/*
     if (!is_null($mesa)) {
       foreach ($ordenCompleta as $key => $value) {
         switch ($key) {
@@ -109,7 +109,7 @@ class MozosController //implements IController
       Mesa::cambiarEstadoMesa($mesa['mesa'], 'esperando pedido');
     } else {
       echo "<br>Sin mesas disponible lo sentimos<br>";
-    }
+    }*/
     $responseObj = ["message" => "PedidoCreado", "PedidoCompleto: " => "LALALALA"];
     return $response->withJson($responseObj, 200);
   }
