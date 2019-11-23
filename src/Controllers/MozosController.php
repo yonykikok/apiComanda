@@ -67,8 +67,8 @@ class MozosController //implements IController
     $ordenCompleta = $request->getParsedBody(); //obtengo la orden completa del cliente
 
     $numeroDeOrden = self::generarCodigoAlfaNumerico(5); //genero un codigo alfanumerico como numero de orden
-   $mesa = Mesa::BuscarMesaDisponible($ordenCompleta['mesa']['ubicacion'], $ordenCompleta['mesa']['asientos']);
- /*
+  /*  $mesa = Mesa::BuscarMesaDisponible($ordenCompleta['mesa']['ubicacion'], $ordenCompleta['mesa']['asientos']);
+
     if (!is_null($mesa)) {
       foreach ($ordenCompleta as $key => $value) {
         switch ($key) {
@@ -110,7 +110,7 @@ class MozosController //implements IController
     } else {
       echo "<br>Sin mesas disponible lo sentimos<br>";
     }*/
-    $responseObj = ["message" => "PedidoCreado", "PedidoCompleto: " => "LALALALA"];
+    $responseObj = ["message" => "PedidoCreado", "PedidoCompleto: " => "SIN MESA"];
     return $response->withJson($responseObj, 200);
   }
   public static function CancelarPedido($request, $response, $args)
