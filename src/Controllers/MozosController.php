@@ -67,9 +67,13 @@ class MozosController //implements IController
     $ordenCompleta = $request->getParsedBody(); //obtengo la orden completa del cliente
 
     $numeroDeOrden = self::generarCodigoAlfaNumerico(5); //genero un codigo alfanumerico como numero de orden
-    $mesa = Mesa::BuscarMesaDisponible($ordenCompleta['mesa']['ubicacion'], $ordenCompleta['mesa']['asientos']);
-    var_dump($mesa);
-    die();
+    //$mesa = Mesa::BuscarMesaDisponible($ordenCompleta['mesa']['ubicacion'], $ordenCompleta['mesa']['asientos']);
+    $mesa=Mesa::where('asientos',$ordenCompleta['mesa']['asientos'])->where('ubicacion',$ordenCompleta['mesa']['ubicacion'])->where('estado','libre')->first();
+    
+    if(is_null($mesa))//si no hay mesas disponible
+    {
+    //  echo 'No hay mesas '.$ubicacion.' de '.$cantPersonas.' asientos disponible<br>';
+    }
 /*
     if (!is_null($mesa)) {
       foreach ($ordenCompleta as $key => $value) {
