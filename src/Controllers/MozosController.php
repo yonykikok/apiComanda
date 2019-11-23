@@ -64,13 +64,10 @@ class MozosController //implements IController
 
   public static function TomarPedido($request, $response, $args)
   {
-    $datosMozo = TokenValidatorMiddleware::GetTokenData($request); //obtengo los datos del mozo que toma el pedido
-    var_dump($datosMozo);
-    /*$ordenCompleta = $request->getParsedBody(); //obtengo la orden completa del cliente
+    $ordenCompleta = $request->getParsedBody(); //obtengo la orden completa del cliente
 
     $numeroDeOrden = self::generarCodigoAlfaNumerico(5); //genero un codigo alfanumerico como numero de orden
     $mesa = Mesa::BuscarMesaDisponible($ordenCompleta['mesa']['ubicacion'], $ordenCompleta['mesa']['asientos']);
-
     if (!is_null($mesa)) {
       foreach ($ordenCompleta as $key => $value) {
         switch ($key) {
@@ -85,6 +82,9 @@ class MozosController //implements IController
             break;
           case 'tragos':
             Trago::ArmarPedido($value, $numeroDeOrden);
+            break;
+          case 'token':
+            $datosMozo = TokenValidatorMiddleware::GetTokenData($request); //obtengo los datos del mozo que toma el pedido
             break;
           default:
             break;
