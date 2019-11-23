@@ -89,9 +89,9 @@ class MozosController //implements IController
           default:
             break;
         }
-      }*/
+      }
       var_dump($datosMozo);
-      /*
+      
       //self::mostrarTodosLosPedidos($numeroDeOrden);
       $pedidoMozo = new PedidoMozo();
       $pedidoMozo->idMozo = $datosMozo->id;
