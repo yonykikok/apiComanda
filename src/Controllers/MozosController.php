@@ -72,7 +72,8 @@ class MozosController //implements IController
     
     if(is_null($mesa))//si no hay mesas disponible
     {
-    //  echo 'No hay mesas '.$ubicacion.' de '.$cantPersonas.' asientos disponible<br>';
+     $responseObj = ["message" => "Sin Mesas", "Pedido rechazado: " => "SIN MESA"];
+    return $response->withJson($responseObj, 200);
     }
 /*
     if (!is_null($mesa)) {
