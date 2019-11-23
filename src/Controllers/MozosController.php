@@ -64,9 +64,9 @@ class MozosController //implements IController
 
   public static function TomarPedido($request, $response, $args)
   {
-    /*$datosMozo = TokenValidatorMiddleware::GetTokenData($request); //obtengo los datos del mozo que toma el pedido
-
-    $ordenCompleta = $request->getParsedBody(); //obtengo la orden completa del cliente
+    $datosMozo = TokenValidatorMiddleware::GetTokenData($request); //obtengo los datos del mozo que toma el pedido
+    var_dump($datosMozo);
+    /*$ordenCompleta = $request->getParsedBody(); //obtengo la orden completa del cliente
 
     $numeroDeOrden = self::generarCodigoAlfaNumerico(5); //genero un codigo alfanumerico como numero de orden
     $mesa = Mesa::BuscarMesaDisponible($ordenCompleta['mesa']['ubicacion'], $ordenCompleta['mesa']['asientos']);
