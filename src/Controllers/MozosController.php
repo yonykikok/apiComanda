@@ -65,17 +65,16 @@ class MozosController //implements IController
   public static function TomarPedido($request, $response, $args)
   {
     $ordenCompleta = $request->getParsedBody(); //obtengo la orden completa del cliente
-    var_dump($ordenCompleta);
     $numeroDeOrden = self::generarCodigoAlfaNumerico(5); //genero un codigo alfanumerico como numero de orden
     //$mesa = Mesa::BuscarMesaDisponible($ordenCompleta['mesa']['ubicacion'], $ordenCompleta['mesa']['asientos']);
- /*   $mesa=Mesa::where('asientos',$ordenCompleta['mesa']['asientos'])->where('ubicacion',$ordenCompleta['mesa']['ubicacion'])->where('estado','libre')->first();
+    $mesa=Mesa::where('asientos',$ordenCompleta['mesa']['asientos'])->where('ubicacion',$ordenCompleta['mesa']['ubicacion'])->where('estado','libre')->first();
     
     if(is_null($mesa))//si no hay mesas disponible
     {
      $responseObj = ["message" => "Sin Mesas", "Pedido rechazado: " => $ordenCompleta['mesa']['ubicacion']];
     return $response->withJson($responseObj, 200);
     }
-
+/*
     if (!is_null($mesa)) {
       foreach ($ordenCompleta as $key => $value) {
         switch ($key) {
