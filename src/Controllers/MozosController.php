@@ -72,7 +72,7 @@ class MozosController //implements IController
     
     if(is_null($mesa))//si no hay mesas disponible
     {
-     $responseObj = ["message" => "Sin Mesas", "Pedido rechazado: " => "SIN MESA"];
+     $responseObj = ["message" => "Sin Mesas", "Pedido rechazado: " => "SIN MESA".$ordenCompleta['mesa']['asientos']]."".$ordenCompleta['mesa']['ubicacion'];
     return $response->withJson($responseObj, 200);
     }
 /*
