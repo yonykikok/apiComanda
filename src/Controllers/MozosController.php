@@ -90,6 +90,8 @@ class MozosController //implements IController
             break;
         }
       }
+      var_dump($datosMozo);
+      /*
       //self::mostrarTodosLosPedidos($numeroDeOrden);
       $pedidoMozo = new PedidoMozo();
       $pedidoMozo->idMozo = $datosMozo->id;
