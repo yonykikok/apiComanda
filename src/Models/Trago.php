@@ -35,7 +35,7 @@ class Trago extends Model
   }
   public static function ArmarPedido($listado,$numeroDeOrden)
   {
-    /*$cantidades=array();
+    $cantidades=array();
     $pedidos=array();
     if(!is_null($listado) && count($listado)>0)
     { 
@@ -89,7 +89,7 @@ class Trago extends Model
         $trago->estado='pendiente';
             self::TragoVendidaMasMas($trago->idTrago,$trago->cantidad);
             $trago->save();
-      }*/
+      }
   }
   public static function DescontarVendidas($orden)
   {
