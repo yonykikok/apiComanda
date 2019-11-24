@@ -53,11 +53,11 @@ class Trago extends Model
               $trago->idTrago=$pedidos[$i];
               $trago->orden=$numeroDeOrden;  
             $trago->estado='pendiente';
-           // self::TragoVendidaMasMas($trago->idTrago,$trago->cantidad);
+            self::TragoVendidaMasMas($trago->idTrago,$trago->cantidad);
             $trago->save();
           }
           else{
-           // echo '<br>Codigo de menu erroneo :'.$pedidos[$i];
+            echo '<br>Codigo de menu erroneo :'.$pedidos[$i];
           }
         }
 

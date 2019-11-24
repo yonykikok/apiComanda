@@ -66,13 +66,17 @@ class MozosController //implements IController
   {
     $ordenCompleta = $request->getParsedBody(); //obtengo la orden completa del cliente
     $numeroDeOrden = self::generarCodigoAlfaNumerico(5); //genero un codigo alfanumerico como numero de orden
-    //$mesa = Mesa::BuscarMesaDisponible($ordenCompleta['mesa']['ubicacion'], $ordenCompleta['mesa']['asientos']);
-    $mesa=Mesa::where('asientos',$ordenCompleta['mesa']['asientos'])->where('ubicacion',$ordenCompleta['mesa']['ubicacion'])->where('estado','libre')->first();
-    
-    if(is_null($mesa))//si no hay mesas disponible
+    $cantPersonas = $ordenCompleta['mesa']['asientos'];
+    $ubicacion = $ordenCompleta['mesa']['ubicacion'];
+    $mesa = Mesa::where('asientos', $cantPersonas)->where('ubicacion', $ubicacion)->where('estado', 'libre')->first();
+
+    if (is_null($mesa)) //si no hay mesas disponible con la cantidad de personas pedidas
     {
-     $responseObj = ["message" => "Sin Mesas", "Pedido rechazado: " => $ordenCompleta['mesa']['ubicacion']];
-    return $response->withJson($responseObj, 200);
+      $mesa = Mesa::where('asientos', '>', $cantPersonas)->where('ubicacion', $ubicacion)->where('estado', 'libre')->first();
+      if (is_null($mesa)) {
+        $responseObj = ["message" => "Sin Mesas", "Pedido rechazado: " => "Sin mesas disponibles"];
+        return $response->withJson($responseObj, 200);
+      }
     }
 
     if (!is_null($mesa)) {
@@ -209,7 +213,7 @@ class MozosController //implements IController
     $totalTragos = PedidoTrago::CalcularCostoDelPedido($orden, $bool);
     $totalAPagar = $totalComidas + $totalBebidas + $totalPostres + $totalTragos;
     $propinaDelMoso = $totalAPagar * 0.10;
-   /* if ($bool) {
+    /* if ($bool) {
       echo 'Costo servicio del mozo(10%) --- $' . $propinaDelMoso . '<br>';
       echo '<br>TOTAL: $' . $totalAPagar . '<br>';
     }*/
