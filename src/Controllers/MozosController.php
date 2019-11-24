@@ -92,7 +92,9 @@ class MozosController //implements IController
             Postre::ArmarPedido($value, $numeroDeOrden);
             break;
           case 'tragos':
-            Trago::ArmarPedido($value, $numeroDeOrden);
+            //Trago::ArmarPedido($value, $numeroDeOrden);
+            $responseObj = ["trago" => $value];
+            return $response->withJson(json_encode($value), 200);
             break;
           case 'token':
             $datosMozo = JWTAuth::GetPayload($value['token']);  //obtengo los datos del mozo que toma el pedido
