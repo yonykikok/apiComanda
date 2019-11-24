@@ -38,7 +38,7 @@ class Trago extends Model
     $cantidades=array();
     $pedidos=array();
     if(!is_null($listado) && count($listado)>0)
-    { 
+    { /*
       if( strpos($listado['id'],',')!=false && strpos($listado['cantidad'],',')!=false)
       {
         $cantidades=explode(',',$listado['cantidad']);
@@ -78,7 +78,7 @@ class Trago extends Model
         {
           echo '<br>Codigo de menu erroneo :'.$listado['id'];
         }
-      }
+      }*/
     }
     else
       {
