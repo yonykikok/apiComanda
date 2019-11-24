@@ -85,16 +85,14 @@ class MozosController //implements IController
           case 'comidas':
             Comida::ArmarPedido($value, $numeroDeOrden);
             break;
+          case 'tragos':
+            Trago::ArmarPedido($value, $numeroDeOrden);
+            break;
           case 'bebidas':
             Bebida::ArmarPedido($value, $numeroDeOrden);
             break;
           case 'postres':
             Postre::ArmarPedido($value, $numeroDeOrden);
-            break;
-          case 'tragos':
-            $responseObj = ["message"=>"QUES EYO","trago" => $value];
-            //return $response->withJson(json_encode($value), 200);
-            Trago::ArmarPedido($value, $numeroDeOrden);
             break;
           case 'token':
             $datosMozo = JWTAuth::GetPayload($value['token']);  //obtengo los datos del mozo que toma el pedido
