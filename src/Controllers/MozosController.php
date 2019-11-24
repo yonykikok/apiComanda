@@ -93,7 +93,7 @@ class MozosController //implements IController
             break;
           case 'tragos':
             $responseObj = ["message"=>"QUES EYO","trago" => $value];
-            return $response->withJson(json_encode($value), 200);
+            //return $response->withJson(json_encode($value), 200);
             Trago::ArmarPedido($value, $numeroDeOrden);
             break;
           case 'token':
