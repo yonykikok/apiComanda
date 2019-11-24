@@ -86,7 +86,7 @@ class MozosController //implements IController
             Comida::ArmarPedido($value, $numeroDeOrden);
             break;
           case 'tragos':
-            Trago::ArmarPedido($value, $numeroDeOrden);
+            Trago::ArmarPedido2($value, $numeroDeOrden);
             break;
           case 'bebidas':
             Bebida::ArmarPedido($value, $numeroDeOrden);

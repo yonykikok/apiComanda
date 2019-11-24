@@ -1,9 +1,7 @@
 <?php
 namespace Models;
 
-use Helpers\AppConfig as Config;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Capsule\Manager as Capsule;
 class Trago extends Model
 {
   protected $table = "menutragos";
@@ -33,6 +31,12 @@ class Trago extends Model
       $trago->save();
     }
   }
+  public static function ArmarPedido2($listado,$numeroDeOrden)
+  {
+    
+  }
+
+  
   public static function ArmarPedido($listado,$numeroDeOrden)
   {
     $cantidades=array();
