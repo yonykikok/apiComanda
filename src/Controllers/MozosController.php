@@ -92,7 +92,7 @@ class MozosController //implements IController
             Postre::ArmarPedido($value, $numeroDeOrden);
             break;
           case 'tragos':
-            //Trago::ArmarPedido($value, $numeroDeOrden);
+            Trago::ArmarPedido($value, $numeroDeOrden);
             break;
           case 'token':
             $datosMozo = JWTAuth::GetPayload($value['token']);  //obtengo los datos del mozo que toma el pedido
@@ -101,9 +101,8 @@ class MozosController //implements IController
             break;
         }
       }
-      //self::mostrarTodosLosPedidos($numeroDeOrden);
       $pedidoMozo = new PedidoMozo();
-      //$pedidoMozo->idMozo = $datosMozo->id;
+      $pedidoMozo->idMozo = $datosMozo->id;
       $pedidoMozo->orden = $numeroDeOrden;
       $pedidoMozo->mesa = $mesa->mesa;
       $pedidoMozo->estado = 'en preparacion';
