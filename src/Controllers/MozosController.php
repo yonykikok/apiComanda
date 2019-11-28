@@ -69,7 +69,6 @@ class MozosController //implements IController
     $cantPersonas = $ordenCompleta['mesa']['asientos'];
     $ubicacion = $ordenCompleta['mesa']['ubicacion'];
     $mesa = Mesa::where('asientos', $cantPersonas)->where('ubicacion', $ubicacion)->where('estado', 'libre')->first();
-
     if (is_null($mesa)) //si no hay mesas disponible con la cantidad de personas pedidas
     {
       $mesa = Mesa::where('asientos', '>', $cantPersonas)->where('ubicacion', $ubicacion)->where('estado', 'libre')->first();
@@ -86,7 +85,7 @@ class MozosController //implements IController
             Comida::ArmarPedido($value, $numeroDeOrden);
             break;
           case 'tragos':
-            Trago::ArmarPedido2($value, $numeroDeOrden);
+            Trago::ArmarPedido($value, $numeroDeOrden);
             break;
           case 'bebidas':
             Bebida::ArmarPedido($value, $numeroDeOrden);
@@ -94,30 +93,30 @@ class MozosController //implements IController
           case 'postres':
             Postre::ArmarPedido($value, $numeroDeOrden);
             break;
-          case 'token':
-            $datosMozo = JWTAuth::GetPayload($value['token']);  //obtengo los datos del mozo que toma el pedido
-            break;
           default:
             break;
         }
       }
-      $pedidoMozo = new PedidoMozo();
-      $pedidoMozo->idMozo = $datosMozo->id;
-      $pedidoMozo->orden = $numeroDeOrden;
-      $pedidoMozo->mesa = $mesa->mesa;
-      $pedidoMozo->estado = 'en preparacion';
-      $pedidoMozo->facturacion = self::CalcularTotalAPagarPorElPedido($numeroDeOrden, false);
-      $pedidoMozo->save();
+      if ($ordenCompleta['token']['token']) {
+        $datosMozo = JWTAuth::GetPayload($ordenCompleta['token']['token']);  //obtengo los datos del mozo que toma el pedido
+        $pedidoMozo = new PedidoMozo();
+        $pedidoMozo->idMozo = $datosMozo->data->id;
+        $pedidoMozo->orden = $numeroDeOrden;
+        $pedidoMozo->mesa = $mesa->mesa;
+        $pedidoMozo->estado = 'en preparacion';
+        $pedidoMozo->facturacion = self::CalcularTotalAPagarPorElPedido($numeroDeOrden, false);
+        $pedidoMozo->save();
 
-      $cliente = new Cliente();
-      $cliente->nombre = $ordenCompleta['cliente']['nombre'];
-      $cliente->orden = $numeroDeOrden;
-      $cliente->mesa = $mesa->mesa;
-      $cliente->save();
-      Mesa::cantidadDeUsosMasMas($mesa['mesa']);
-      Mesa::cambiarEstadoMesa($mesa['mesa'], 'esperando pedido');
-    } else {
-      echo "<br>Sin mesas disponible lo sentimos<br>";
+        $cliente = new Cliente();
+        $cliente->nombre = $ordenCompleta['cliente']['nombre'];
+        $cliente->orden = $numeroDeOrden;
+        $cliente->mesa = $mesa->mesa;
+        $cliente->save();
+        Mesa::cantidadDeUsosMasMas($mesa['mesa']);
+        Mesa::cambiarEstadoMesa($mesa['mesa'], 'esperando pedido');
+      } else {
+        echo "<br>Sin mesas disponible lo sentimos<br>";
+      }
     }
     $responseObj = ["message" => "PedidoCreado", "PedidoCompleto: " => $pedidoMozo];
     return $response->withJson(json_encode($responseObj), 200);
