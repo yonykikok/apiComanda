@@ -59,7 +59,7 @@ class Trago extends Model
         }
       } else {
         if (self::VerificarExistencia($listado['id'])) {
-          $trago = new Pedidotrago;
+          $trago = new PedidoTrago;
           $trago->cantidad = $listado['cantidad'];
           $trago->idTrago = $listado['id'];
           $trago->orden = $numeroDeOrden;
