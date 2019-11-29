@@ -27,13 +27,14 @@ class BartenderController //implements IController
     $pedidosPendientes=PedidoTrago::where('estado','pendiente')->get();
    if(count($pedidosPendientes)>0)
    {
-     foreach ($pedidosPendientes as $indice => $pedido) {
-       $trago=Trago::where('id',$pedido->idTrago)->get()->first();       
-       echo $trago->nombre.' >>> Orden: '.$pedido['orden'].'<br>';
-      }
+    //  foreach ($pedidosPendientes as $indice => $pedido) {
+    //    $trago=Trago::where('id',$pedido->idTrago)->get()->first();       
+    //    echo $trago->nombre.' >>> Orden: '.$pedido['orden'].'<br>';
+    //   }
+    return $response->withJson(json_encode($pedidosPendientes), 200);
    }
    else{
-     echo 'Sin Pedidos Pendientes';
+    return $response->withJson("sin pedidos pendientes", 200);
    }
   }
   public static function PrepararPedido($request,$response,$args)
