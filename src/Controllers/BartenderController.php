@@ -23,18 +23,25 @@ use Illuminate\Database\Capsule\Manager as Capsule;
 
 class BartenderController //implements IController
 {
+  public static function PedidosEnPreparacion($request,$response,$args){
+    $pedidosPendientes=PedidoTrago::where('estado','en preparacion')->get();
+   if(count($pedidosPendientes)>0)
+   {
+    return json_encode($pedidosPendientes);
+   }
+   else{
+    return $response->withJson("sin pedidos", 200);
+   }
+  }
+    
   public static function PedidosPendientes($request,$response,$args){
     $pedidosPendientes=PedidoTrago::where('estado','pendiente')->get();
    if(count($pedidosPendientes)>0)
    {
-    //  foreach ($pedidosPendientes as $indice => $pedido) {
-    //    $trago=Trago::where('id',$pedido->idTrago)->get()->first();       
-    //    echo $trago->nombre.' >>> Orden: '.$pedido['orden'].'<br>';
-    //   }
     return json_encode($pedidosPendientes);
    }
    else{
-    return $response->withJson("sin pedidos pendientes", 200);
+    return $response->withJson("sin pedidos", 200);
    }
   }
   public static function PrepararPedido($request,$response,$args)
