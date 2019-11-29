@@ -57,8 +57,9 @@ class BartenderController //implements IController
  
   public static function PrepararPedido($request,$response,$args)
   {
-    $data = json_decode($request->getBody());
-    var_dump($data);
+    $data= $request->getParsedBody();
+    var_dump("HOLA".$data);
+    die();
     if(is_null($data))
     {
       $pedido=PedidoTrago::where('estado','pendiente')->get()->first();//obtengo el pedido que le sigue por orden
