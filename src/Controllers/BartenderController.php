@@ -31,7 +31,7 @@ class BartenderController //implements IController
     //    $trago=Trago::where('id',$pedido->idTrago)->get()->first();       
     //    echo $trago->nombre.' >>> Orden: '.$pedido['orden'].'<br>';
     //   }
-    return $response->withJson(json_encode($pedidosPendientes), 200);
+    return json_encode($pedidosPendientes);
    }
    else{
     return $response->withJson("sin pedidos pendientes", 200);
