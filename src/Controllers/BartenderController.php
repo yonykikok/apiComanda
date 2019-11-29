@@ -57,7 +57,7 @@ class BartenderController //implements IController
  
   public static function PrepararPedido($request,$response,$args)
   {
-    $data= $request->getParsedBody();
+    $data= $args["orden"];
     var_dump($data);
     var_dump("CHAU");
     die();

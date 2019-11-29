@@ -14,7 +14,7 @@ $app->group('/Bartender',function(){
     $this->get('/',BartenderController::class.':Pedidos');
     $this->get('/pendientes',BartenderController::class.':PedidosPendientes');
     $this->get('/enPreparacion',BartenderController::class.':PedidosEnPreparacion');
-    $this->post('/PrepararPedido',BartenderController::class.':PrepararPedido');
+    $this->post('/PrepararPedido/{orden}',BartenderController::class.':PrepararPedido');
     $this->post('/TerminarPedido',BartenderController::class.':TerminarPedido');
 })/*->add(AuthMiddleware::class.':IsLoggedIn')
 ->add(RoleMiddleware::class . ':esBartender')
