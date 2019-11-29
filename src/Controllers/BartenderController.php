@@ -65,7 +65,7 @@ class BartenderController //implements IController
     }
     else
     {
-      var_dump($data);
+      var_dump("HOLA".$data);
       if(isset($data['orden']))// si ingresa una orden la busca y le da prioridad a esa orden
       {
         $pedido=PedidoTrago::where('estado','pendiente')->where('orden',$data['orden'])->get()->first();//obtengo el pedido que le sigue por orden
