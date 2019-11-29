@@ -11,7 +11,8 @@ use Middleware\AuthMiddleware;
 
 return function(App $app){
 $app->group('/Bartender',function(){
-    $this->get('/',BartenderController::class.':PedidosPendientes');
+    $this->get('/',BartenderController::class.':Pedidos');
+    $this->get('/pendientes',BartenderController::class.':PedidosPendientes');
     $this->get('/enPreparacion',BartenderController::class.':PedidosEnPreparacion');
     $this->post('/PrepararPedido',BartenderController::class.':PrepararPedido');
     $this->post('/TerminarPedido',BartenderController::class.':TerminarPedido');

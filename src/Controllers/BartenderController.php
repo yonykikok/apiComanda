@@ -33,7 +33,17 @@ class BartenderController //implements IController
     return $response->withJson("sin pedidos", 200);
    }
   }
-    
+   
+  public static function Pedidos($request,$response,$args){
+    $pedidosPendientes=PedidoTrago::all();
+   if(count($pedidosPendientes)>0)
+   {
+    return json_encode($pedidosPendientes);
+   }
+   else{
+    return $response->withJson("sin pedidos", 200);
+   }
+  }
   public static function PedidosPendientes($request,$response,$args){
     $pedidosPendientes=PedidoTrago::where('estado','pendiente')->get();
    if(count($pedidosPendientes)>0)
@@ -44,6 +54,7 @@ class BartenderController //implements IController
     return $response->withJson("sin pedidos", 200);
    }
   }
+ 
   public static function PrepararPedido($request,$response,$args)
   {
     $data=$request->getParsedBody();
