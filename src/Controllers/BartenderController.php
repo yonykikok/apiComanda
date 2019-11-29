@@ -57,21 +57,18 @@ class BartenderController //implements IController
  
   public static function PrepararPedido($request,$response,$args)
   {
-    $data= $args["orden"];
-    var_dump($data);
-    var_dump("CHAU");
-    die();
-    if(is_null($data))
+    $orden= $args["orden"];
+    if(is_null($orden))
     {
       $pedido=PedidoTrago::where('estado','pendiente')->get()->first();//obtengo el pedido que le sigue por orden
-      self::CambiarEstado($pedido,'pendiente','en preparacion',$data['orden']);
+      self::CambiarEstado($pedido,'pendiente','en preparacion',$orden);
     }
     else
     {
-      if(isset($data['orden']))// si ingresa una orden la busca y le da prioridad a esa orden
+      if(isset($orden))// si ingresa una orden la busca y le da prioridad a esa orden
       {
-        $pedido=PedidoTrago::where('estado','pendiente')->where('orden',$data['orden'])->get()->first();//obtengo el pedido que le sigue por orden
-        self::CambiarEstado($pedido,'pendiente','en preparacion',$data['orden']);
+        $pedido=PedidoTrago::where('estado','pendiente')->where('orden',$orden)->get()->first();//obtengo el pedido que le sigue por orden
+        self::CambiarEstado($pedido,'pendiente','en preparacion',$orden);
       }
       else{
         $pedido=PedidoTrago::where('estado','pendiente')->get()->first();//obtengo el pedido que le sigue por orden
