@@ -61,13 +61,13 @@ class BartenderController //implements IController
     if(is_null($orden))
     {
       $pedido=PedidoTrago::where('estado','pendiente')->get()->first();//obtengo el pedido que le sigue por orden
-      self::CambiarEstado($pedido,'pendiente','en preparacion',$orden);
+      // self::CambiarEstado($pedido,'pendiente','en preparacion',$orden);
     }
     else
     {
       if(isset($orden))// si ingresa una orden la busca y le da prioridad a esa orden
       {
-        $pedido=PedidoTrago::where('estado','pendiente')->where('orden',$orden)->get()->first();//obtengo el pedido que le sigue por orden
+        $pedido=PedidoTrago::where('estado','pendiente')->where('orden',$orden)->get()->first();
         self::CambiarEstado($pedido,'pendiente','en preparacion',$orden);
       }
       else{
@@ -86,7 +86,6 @@ class BartenderController //implements IController
       {
         $pedido->estado=$estadoSiguiente;//cambiamos su estado
         $pedido->save();//guardamos los cambios
-        echo($pedido);
       }
     }
     else
