@@ -58,24 +58,25 @@ class BartenderController //implements IController
   public static function PrepararPedido($request,$response,$args)
   {
     $orden= $args["orden"];
+    $retorno="";
     if(is_null($orden))
     {
       $pedido=PedidoTrago::where('estado','pendiente')->get()->first();//obtengo el pedido que le sigue por orden
-       self::CambiarEstado($pedido,'pendiente','en preparacion',$orden);
+      $retorno= self::CambiarEstado($pedido,'pendiente','en preparacion',$orden);
     }
     else
     {
       if(isset($orden))// si ingresa una orden la busca y le da prioridad a esa orden
       {
         $pedido=PedidoTrago::where('estado','pendiente')->where('orden',$orden)->get()->first();
-        self::CambiarEstado($pedido,'pendiente','en preparacion',$orden);
+        $retorno= self::CambiarEstado($pedido,'pendiente','en preparacion',$orden);
       }
       else{
         $pedido=PedidoTrago::where('estado','pendiente')->get()->first();//obtengo el pedido que le sigue por orden
-        self::CambiarEstado($pedido,'pendiente','en preparacion','');
+        $retorno=self::CambiarEstado($pedido,'pendiente','en preparacion','');
       }
     }
-    return $response->withJson("todo ok", 200);
+    return $response->withJson($retorno, 200);
 
   }
 
@@ -89,16 +90,17 @@ class BartenderController //implements IController
         $pedido->estado=$estadoSiguiente;//cambiamos su estado
         $pedido->save();//guardamos los cambios
       }
+      return "todo ok";
     }
     else
     {
       if($ordenABuscar)
       {
-        echo 'No hay pedidos con orden: '.$ordenABuscar;
+        return 'No hay pedidos con orden: '.$ordenABuscar;
       }
       else
       {
-        echo 'No hay pedidos '.$estadoActual;
+        return 'No hay pedidos '.$estadoActual;
       }
     }
   }
