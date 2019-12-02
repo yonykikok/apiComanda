@@ -111,6 +111,7 @@ class MozosController //implements IController
         $cliente->nombre = $ordenCompleta['cliente']['nombre'];
         $cliente->orden = $numeroDeOrden;
         $cliente->mesa = $mesa->mesa;
+        $cliente->fecha = date("Ymd");
         $cliente->save();
         Mesa::cantidadDeUsosMasMas($mesa['mesa']);
         Mesa::cambiarEstadoMesa($mesa['mesa'], 'esperando pedido');
@@ -170,7 +171,7 @@ class MozosController //implements IController
       $ordenDelMozo = Mozo::where('orden', $orden)->first();
       $ordenDelMozo->estado = 'en camino';
       $ordenDelMozo->save();
-      echo 'Pedido En Camino';
+      // echo 'Pedido En Camino';
     }
   }
   public static function CobrarPedido($request, $response, $args)
