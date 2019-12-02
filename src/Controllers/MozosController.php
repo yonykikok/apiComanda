@@ -111,7 +111,7 @@ class MozosController //implements IController
         $cliente->nombre = $ordenCompleta['cliente']['nombre'];
         $cliente->orden = $numeroDeOrden;
         $cliente->mesa = $mesa->mesa;
-        $cliente->fecha = date("Ymd");
+        $cliente->fecha = date("Y-m-d H:i:s"); 
         $cliente->save();
         Mesa::cantidadDeUsosMasMas($mesa['mesa']);
         Mesa::cambiarEstadoMesa($mesa['mesa'], 'esperando pedido');
