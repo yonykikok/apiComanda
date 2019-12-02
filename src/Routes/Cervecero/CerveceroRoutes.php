@@ -10,10 +10,13 @@ use Middleware\AuthMiddleware;
 use Middleware\RegistroMiddleware;
 return function(App $app){
 $app->group('/Cervecero',function(){
-    $this->get('/',CerveceroController::class.':PedidosPendientes');
-    $this->post('/PrepararPedido',CerveceroController::class.':PrepararPedido');
-    $this->post('/TerminarPedido',CerveceroController::class.':TerminarPedido');
-})->add(AuthMiddleware::class.':IsLoggedIn')
+
+    $this->get('/',CerveceroController::class.':Pedidos');
+    $this->get('/pendientes',CerveceroController::class.':PedidosPendientes');
+    $this->get('/enPreparacion',CerveceroController::class.':PedidosEnPreparacion');
+    $this->post('/PrepararPedido/{orden}',CerveceroController::class.':PrepararPedido');
+    $this->post('/TerminarPedido/{orden}',CerveceroController::class.':TerminarPedido');
+})/*->add(AuthMiddleware::class.':IsLoggedIn')
 ->add(RoleMiddleware::class . ':esCervecero')
-->add(RegistroMiddleware::class . ':guardarOperacion');
+->add(RegistroMiddleware::class . ':guardarOperacion')*/;
 };

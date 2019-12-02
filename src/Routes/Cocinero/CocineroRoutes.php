@@ -15,7 +15,7 @@ $app->group('/Cocinero',function(){
     $this->post('/TerminarPedido',CocinerosController::class.':TerminarPedido');
     $this->post('/PrepararPostre',CocinerosController::class.':PrepararPostre');
     $this->post('/TerminarPedidoPostre',CocinerosController::class.':TerminarPedidoPostre');
-})->add(AuthMiddleware::class.':IsLoggedIn')
+})/*->add(AuthMiddleware::class.':IsLoggedIn')
 ->add(RoleMiddleware::class . ':esCocinero')
-->add(RegistroMiddleware::class . ':guardarOperacion');
+->add(RegistroMiddleware::class . ':guardarOperacion')*/;
 };
