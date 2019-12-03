@@ -16,7 +16,7 @@ use Controllers\MozosController;
 class ClientesController //implements IController
 {
 
- 
+
   public static function GetAll($request, $response, $args)
   {
     return json_encode(Cliente::all());
@@ -37,7 +37,9 @@ class ClientesController //implements IController
   public static function VerPedido($request, $response, $args)
   {
     $informacion = $request->getParsedBody();
-    var_dump($informacion);
+    $pedido= PedidoMozo::where("mesa", $informacion['mesa'])->where("orden", $informacion['orden'])->first();
+    
+    var_dump($pedido);
     die();
     MozosController::mostrarTodosLosPedidos($informacion['orden']);
   }
@@ -273,5 +275,4 @@ class ClientesController //implements IController
     }
     return $retorno;
   }
- 
 }
