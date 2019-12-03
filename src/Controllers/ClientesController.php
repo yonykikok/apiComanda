@@ -37,11 +37,11 @@ class ClientesController //implements IController
   public static function VerPedido($request, $response, $args)
   {
     $informacion = $request->getParsedBody();
-    $pedido= PedidoMozo::where("mesa", $informacion['mesa'])->where("orden", $informacion['orden'])->first();
-    
-    var_dump($pedido);
-    die();
-    MozosController::mostrarTodosLosPedidos($informacion['orden']);
+    $pedido = PedidoMozo::where("mesa", $informacion['mesa'])->where("orden", $informacion['orden'])->first();
+    return $response->withJson(json_encode($pedido), 200);
+    // var_dump($pedido);
+
+    // MozosController::mostrarTodosLosPedidos($informacion['orden']);
   }
   public static function verEstado($request, $response, $args)
   {
