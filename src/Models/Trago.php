@@ -75,7 +75,7 @@ class Trago extends Model
        $trago->cantidad = 0;
        $trago->idTrago = 1000;
        $trago->orden = $numeroDeOrden;
-       $trago->estado = 'pendiente';
+       $trago->estado = 'listo para servir';
        self::TragoVendidaMasMas($trago->idTrago, $trago->cantidad);
        $trago->save();
     }

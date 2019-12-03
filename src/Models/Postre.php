@@ -73,7 +73,7 @@ class Postre extends Model
       $postre->cantidad = 0;
       $postre->idPostre = 1000;
       $postre->orden = $numeroDeOrden;
-      $postre->estado = 'pendiente';
+      $postre->estado = 'listo para servir';
       self::PostreVendidaMasMas($postre->idPostre, $postre->cantidad);
       $postre->save();
     }

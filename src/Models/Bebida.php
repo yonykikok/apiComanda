@@ -87,7 +87,7 @@ class Bebida extends Model
       $bebida->cantidad=0;
       $bebida->idBebida=1000;
       $bebida->orden=$numeroDeOrden;  
-      $bebida->estado='pendiente';
+      $bebida->estado='listo para servir';
       self::BebidaVendidaMasMas($bebida->idBebida,$bebida->cantidad);
       $bebida->save();
     }

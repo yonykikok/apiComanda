@@ -89,7 +89,7 @@ class Comida extends Model
         $comida->cantidad=0;
         $comida->idComida=1000;
         $comida->orden=$numeroDeOrden;  
-        $comida->estado='pendiente';
+        $comida->estado='listo para servir';
             self::ComidaVendidaMasMas($comida->idComida,$comida->cantidad);
             $comida->save();
       }
