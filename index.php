@@ -38,6 +38,9 @@ $mozoRoutes($app);
 $clienteRoutes = require __DIR__.'/src/Routes/Cliente/ClienteRoutes.php';
 $clienteRoutes($app);
 
+$usuarioRoutes = require __DIR__.'/src/Routes/Usuario/SocioRoutes.php';
+$usuarioRoutes($app);
+
 $cocineroRoutes = require __DIR__.'/src/Routes/Cocinero/CocineroRoutes.php';
 $cocineroRoutes($app);
 

@@ -271,10 +271,5 @@ class ClientesController //implements IController
     }
     return $retorno;
   }
-  public static function obtenerPedidosPorUsuario($request, $response, $args)
-  {
-   //
-   $nombre = $args["nombre"];
-   return $response->withJson($nombre , 200);
-  }
+ 
 }

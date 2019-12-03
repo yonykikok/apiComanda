@@ -13,6 +13,8 @@ return function(App $app)
     $this->get('/', SociosController::class . ':VerPedidos');
     $this->get('/TraerTodos', SociosController::class . ':VerPedidosEnPreparacion');
     $this->post('/PorOrden', SociosController::class . ':VerPedidoPorOrden');    
+    $this->post('/{nombre}',SociosController::class.':obtenerPedidosPorUsuario');
+
   });//->add(AuthMiddleware::class.':IsLoggedIn')
     //-/>add(RoleMiddleware::class.':IsAdmin');
     // ->add(RegistroMiddleware::class . ':guardarOperacion'); 

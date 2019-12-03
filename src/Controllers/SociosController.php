@@ -27,6 +27,12 @@ use Illuminate\Database\Capsule\Manager as Capsule;
 
 class SociosController
 {
+  public static function obtenerPedidosPorUsuario($request, $response, $args)
+  {
+   //
+   $nombre = $args["nombre"];
+   return $response->withJson($nombre , 200);
+  }
   public static function VerPedidos($request, $response, $args)
   {
     $pedidos= PedidoMozo::all();
