@@ -36,9 +36,9 @@ class ClientesController //implements IController
   }
   public static function VerPedido($request, $response, $args)
   {
-    var_dump("ASLDASD");
-    die();
     $informacion = $request->getParsedBody();
+    var_dump($informacion);
+    die();
     MozosController::mostrarTodosLosPedidos($informacion['orden']);
   }
   public static function verEstado($request, $response, $args)
