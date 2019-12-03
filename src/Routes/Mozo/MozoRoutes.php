@@ -11,6 +11,7 @@ use Middleware\RegistroMiddleware;
 
 return function(App $app){
 $app->group('/Mozo',function(){
+    $this->get('/',MozosController::class.':GetAll');
     $this->post('/TomarPedido',MozosController::class.':TomarPedido');
     $this->post('/ServirPedido',MozosController::class.':ServirPedido');
     $this->post('/CobrarPedido',MozosController::class.':CobrarPedido');
