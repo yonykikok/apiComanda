@@ -20,7 +20,7 @@ class CocinerosController //implements IController
 
   public static function PedidosEnPreparacion($request, $response, $args)
   {
-    $pedidosPendientes = PedidoComida::where('estado', 'en preparacion')->get();
+    $pedidosPendientes = PedidoComida::where('estado', 'en preparacion')->where('idComida','!=',1000)->get();
     if (count($pedidosPendientes) > 0) {
       return json_encode($pedidosPendientes);
     } else {
@@ -30,7 +30,7 @@ class CocinerosController //implements IController
 
   public static function Pedidos($request, $response, $args)
   {
-    $pedidosPendientes = PedidoComida::all();
+    $pedidosPendientes = PedidoComida::where('idComida','!=',1000)->get();
     foreach ($pedidosPendientes as $key => $value) {
       if ($value->idComida != 1000) {
         $value['imagenPedido'] = Comida::where('id', $value->idComida)->first()->imagen;
@@ -44,7 +44,7 @@ class CocinerosController //implements IController
   }
   public static function PedidosPendientes($request, $response, $args)
   {
-    $pedidosPendientes = PedidoComida::where('estado', 'pendiente')->get();
+    $pedidosPendientes = PedidoComida::where('estado', 'pendiente')->where('idComida','!=',1000)->get();
     if (count($pedidosPendientes) > 0) {
       return json_encode($pedidosPendientes);
     } else {
@@ -118,7 +118,7 @@ class CocinerosController //implements IController
   //POSTRESSSSSSS
   public static function PedidosEnPreparacionPostres($request, $response, $args)
   {
-    $pedidosPendientes = PedidoPostre::where('estado', 'en preparacion')->get();
+    $pedidosPendientes = PedidoPostre::where('estado', 'en preparacion')->where('idPostre','!=',1000)->get();
     if (count($pedidosPendientes) > 0) {
       return json_encode($pedidosPendientes);
     } else {
@@ -128,7 +128,7 @@ class CocinerosController //implements IController
 
   public static function PedidosPostres($request, $response, $args)
   {
-    $pedidosPendientes = PedidoPostre::all();
+    $pedidosPendientes = PedidoPostre::where('idPostre','!=',1000)->get();
     foreach ($pedidosPendientes as $key => $value) {
       if ($value->idPostre != 1000) {
         $value['imagenPedido'] = Postre::where('id', $value->idPostre)->first()->imagen;
@@ -142,7 +142,7 @@ class CocinerosController //implements IController
   }
   public static function PedidosPendientesPostres($request, $response, $args)
   {
-    $pedidosPendientes = PedidoPostre::where('estado', 'pendiente')->get();
+    $pedidosPendientes = PedidoPostre::where('estado', 'pendiente')->where('idPostre','!=',1000)->get();
     if (count($pedidosPendientes) > 0) {
       return json_encode($pedidosPendientes);
     } else {
