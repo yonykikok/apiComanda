@@ -32,8 +32,8 @@ class CocinerosController //implements IController
   {
     $pedidosPendientes = PedidoComida::all();
     foreach ($pedidosPendientes as $key => $value) {
-      if ($value->idTrago != 1000) {
-        $value['imagenPedido'] = Comida::where('id', $value->idTrago)->first()->imagen;
+      if ($value->idComida != 1000) {
+        $value['imagenPedido'] = Comida::where('id', $value->idComida)->first()->imagen;
       }
     }
     if (count($pedidosPendientes) > 0) {
@@ -130,8 +130,8 @@ class CocinerosController //implements IController
   {
     $pedidosPendientes = PedidoPostre::all();
     foreach ($pedidosPendientes as $key => $value) {
-      if ($value->idTrago != 1000) {
-        $value['imagenPedido'] = Postre::where('id', $value->idTrago)->first()->imagen;
+      if ($value->idPostre != 1000) {
+        $value['imagenPedido'] = Postre::where('id', $value->idPostre)->first()->imagen;
       }
     }
     if (count($pedidosPendientes) > 0) {
