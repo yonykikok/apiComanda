@@ -31,7 +31,8 @@ class SociosController
   {
    //
    $nombre = $args["nombre"];
-   return $response->withJson($nombre , 200);
+   $clientes=Cliente::where("nombre",$nombre)->get();
+   return $response->withJson(json_encode($clientes), 200);
   }
   public static function VerPedidos($request, $response, $args)
   {
