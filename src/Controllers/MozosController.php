@@ -27,6 +27,9 @@ class MozosController //implements IController
   {
     return json_encode(Mozo::all());
   }
+  public static function obtenerPedidosListos($request,$response,$args){
+    var_dump("OHAS");
+  }
   public static function TraerComidas($request, $response, $args)
   {
     return json_encode(Comida::all());
