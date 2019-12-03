@@ -2,25 +2,11 @@
 
 namespace Controllers;
 
-use Models\Mozo;
-use Models\Mesa;
 use Models\Comida;
-use Models\Cliente;
-use Models\Bebida;
 use Models\Postre;
-use Models\Trago;
-use Models\PedidoMozo;
-use Models\PedidoTrago;
-use Models\PedidoBebida;
 use Models\PedidoComida;
 use Models\PedidoPostre;
 use Controllers\MozosController;
-use Helpers\JWTAuth;
-use Helpers\AppConfig as Config;
-use Helpers\FilesHelper as Files;
-use Helpers\ImagesHelper as Images;
-use Middleware\TokenValidatorMiddleware;
-use Illuminate\Database\Capsule\Manager as Capsule;
 
 class CocinerosController //implements IController
 {

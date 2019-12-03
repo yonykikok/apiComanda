@@ -403,39 +403,8 @@ class MozosController //implements IController
       "tragos" => $tragos,
       "postres" => $postres
     );
-    // echo "<h3>----------Comidas---------</h3>";
-    // foreach ($comidas as $key => $value) {
-    //   echo 'Cod: '.$value['id'].'<br>';
-    //   echo 'Nombre: '.$value['nombre'].'<br>';
-    //   echo 'Precio: '.$value['precio'].'<br>';
-    //   echo "---------------------------------<br>";
-    // }
-
-    // echo "<h3>----------Bebidas---------</h3>";
-    // foreach ($bebidas as $key => $value) {
-    //   echo 'Cod: '.$value['id'].'<br>';
-    //   echo 'Nombre: '.$value['nombre'].'<br>';
-    //   echo 'Precio: '.$value['precio'].'<br>';
-    //   echo "---------------------------------<br>";
-    // }
-
-    // echo "<h3>----------Tragos---------</h3>";
-    // foreach ($tragos as $key => $value) {
-    //   echo 'Cod: '.$value['id'].'<br>';
-    //   echo 'Nombre: '.$value['nombre'].'<br>';
-    //   echo 'Precio: '.$value['precio'].'<br>';
-    //   echo "---------------------------------<br>";
-    // }
-
-    // echo "<h3>----------Postres---------</h3>";
-    // foreach ($postres as $key => $value) {
-    //   echo 'Cod: '.$value['id'].'<br>';
-    //   echo 'Nombre: '.$value['nombre'].'<br>';
-    //   echo 'Precio: '.$value['precio'].'<br>';
-    //   echo "---------------------------------<br>";
-    // }
+    
     return json_encode($array);
-    //return $response->withJson(json_encode($array), 200);
   }
   public static function Update($request, $response, $args)
   {
