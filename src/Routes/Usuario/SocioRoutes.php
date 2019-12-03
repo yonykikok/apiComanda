@@ -10,7 +10,6 @@ return function(App $app)
 {
   $app->group('/usuarios', function()
   {
-    $this->get('/{usuario}', SociosController::class . ':obtenerPedidosPorUsuario');
     $this->get('/', SociosController::class . ':VerPedidos');
     $this->get('/TraerTodos', SociosController::class . ':VerPedidosEnPreparacion');
     $this->post('/PorOrden', SociosController::class . ':VerPedidoPorOrden');    
