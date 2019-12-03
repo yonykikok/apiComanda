@@ -22,8 +22,5 @@ class UsuariosController
       echo "Pedido '" . $pedido->orden . "' de la mesa " . $pedido->mesa . ' ' . $pedido->estado . '<br>';
     }
   }
-  public static function obtenerPedidosPorUsuario($request, $response, $args)
-  { 
-    var_dump($args["nombre"]);
-  }
+ 
 }
