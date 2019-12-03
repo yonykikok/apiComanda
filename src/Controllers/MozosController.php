@@ -27,8 +27,14 @@ class MozosController //implements IController
   {
     return json_encode(Mozo::all());
   }
-  public static function obtenerPedidosListos($request,$response,$args){
-    var_dump("OHAS");
+  public static function obtenerPedidosListos($request, $response, $args)
+  {
+    $pedidos = Mozo::where('estado', "en camino")->get();
+    if (!is_null($pedidos)) {
+      return $response->withJson(json_encode($pedidos, 200));
+    } else {
+      return $response->withjson("sin pedidos para entregar", 200);
+    }
   }
   public static function TraerComidas($request, $response, $args)
   {
@@ -114,7 +120,7 @@ class MozosController //implements IController
         $cliente->nombre = $ordenCompleta['cliente']['nombre'];
         $cliente->orden = $numeroDeOrden;
         $cliente->mesa = $mesa->mesa;
-        $cliente->fecha = date("Y-m-d H:i:s"); 
+        $cliente->fecha = date("Y-m-d H:i:s");
         $cliente->save();
         Mesa::cantidadDeUsosMasMas($mesa['mesa']);
         Mesa::cambiarEstadoMesa($mesa['mesa'], 'esperando pedido');
@@ -406,7 +412,7 @@ class MozosController //implements IController
       "tragos" => $tragos,
       "postres" => $postres
     );
-    
+
     return json_encode($array);
   }
   public static function Update($request, $response, $args)
