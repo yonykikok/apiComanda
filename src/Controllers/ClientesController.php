@@ -20,10 +20,11 @@ use Illuminate\Database\Capsule\Manager as Capsule;
 
 class ClientesController //implements IController
 {
-  // public static function obtenerPedidosPorUsuario($request, $response, $args)
-  // { 
-  //   var_dump($args["nombre"]);
-  // }
+  public static function obtenerPedidosPorUsuario($request, $response, $args)
+  { 
+    var_dump($args["nombre"]);
+    return json_encode(Cliente::all());
+  }
   public static function GetAll($request, $response, $args)
   {
     return json_encode(Cliente::all());
