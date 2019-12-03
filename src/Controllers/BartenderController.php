@@ -38,7 +38,7 @@ class BartenderController //implements IController
     $pedidosPendientes = PedidoTrago::all();
     foreach ($pedidosPendientes as $key => $value) {
       if ($value->idTrago != 1000) {
-        $value['imagenTrago'] = Trago::where('id', $value->idTrago)->first()->imagen;
+        $value['imagenPedido'] = Trago::where('id', $value->idTrago)->first()->imagen;
       }
     }
     if (count($pedidosPendientes) > 0) {

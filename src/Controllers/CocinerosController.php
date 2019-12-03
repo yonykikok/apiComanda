@@ -31,6 +31,11 @@ class CocinerosController //implements IController
   public static function Pedidos($request, $response, $args)
   {
     $pedidosPendientes = PedidoComida::all();
+    foreach ($pedidosPendientes as $key => $value) {
+      if ($value->idTrago != 1000) {
+        $value['imagenPedido'] = Trago::where('id', $value->idTrago)->first()->imagen;
+      }
+    }
     if (count($pedidosPendientes) > 0) {
       return json_encode($pedidosPendientes);
     } else {
@@ -124,6 +129,11 @@ class CocinerosController //implements IController
   public static function PedidosPostres($request, $response, $args)
   {
     $pedidosPendientes = PedidoPostre::all();
+    foreach ($pedidosPendientes as $key => $value) {
+      if ($value->idTrago != 1000) {
+        $value['imagenPedido'] = Trago::where('id', $value->idTrago)->first()->imagen;
+      }
+    }
     if (count($pedidosPendientes) > 0) {
       return json_encode($pedidosPendientes);
     } else {
