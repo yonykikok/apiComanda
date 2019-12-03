@@ -36,6 +36,10 @@ class BartenderController //implements IController
   public static function Pedidos($request, $response, $args)
   {
     $pedidosPendientes = PedidoTrago::all();
+    foreach ($pedidosPendientes as $pedido => $value) {
+      var_dump($pedido);
+      die();
+    }
     if (count($pedidosPendientes) > 0) {
       return json_encode($pedidosPendientes);
     } else {
