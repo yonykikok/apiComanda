@@ -12,7 +12,7 @@ class CocinerosController //implements IController
 {
   public static function PedidosEnPreparacion($request, $response, $args)
   {
-    $pedidosPendientes = PedidoBebida::where('estado', 'en preparacion')->get();
+    $pedidosPendientes = PedidoComida::where('estado', 'en preparacion')->get();
     if (count($pedidosPendientes) > 0) {
       return json_encode($pedidosPendientes);
     } else {
@@ -91,6 +91,99 @@ class CocinerosController //implements IController
         $retorno = self::CambiarEstado($pedido, 'en preparacion', 'listo para servir', $orden);
       } else {
         $pedido = PedidoComida::where('estado', 'en preparacion')->get()->first(); //obtengo el pedido que le sigue por orden
+        $retorno = self::CambiarEstado($pedido, 'en preparacion', 'listo para servir', '');
+      }
+    }
+    if (!is_null($pedido)) {
+      MozosController::ActualizarEstadoPedido($pedido->orden);
+    }
+    return $response->withJson($retorno, 200);
+  }
+
+
+
+  //POSTRESSSSSSS
+  public static function PedidosEnPreparacionPostres($request, $response, $args)
+  {
+    $pedidosPendientes = PedidoPostre::where('estado', 'en preparacion')->get();
+    if (count($pedidosPendientes) > 0) {
+      return json_encode($pedidosPendientes);
+    } else {
+      return $response->withJson("sin pedidos", 200);
+    }
+  }
+
+  public static function PedidosPostres($request, $response, $args)
+  {
+    $pedidosPendientes = PedidoPostre::all();
+    if (count($pedidosPendientes) > 0) {
+      return json_encode($pedidosPendientes);
+    } else {
+      return $response->withJson("sin pedidos", 200);
+    }
+  }
+  public static function PedidosPendientesPostres($request, $response, $args)
+  {
+    $pedidosPendientes = PedidoPostre::where('estado', 'pendiente')->get();
+    if (count($pedidosPendientes) > 0) {
+      return json_encode($pedidosPendientes);
+    } else {
+      return $response->withJson("sin pedidos", 200);
+    }
+  }
+
+  public static function PrepararPedidoPostres($request, $response, $args)
+  {
+    $orden = $args["orden"];
+    $retorno = "";
+    if (is_null($orden)) {
+      $pedido = PedidoPostre::where('estado', 'pendiente')->get()->first(); //obtengo el pedido que le sigue por orden
+      $retorno = self::CambiarEstado($pedido, 'pendiente', 'en preparacion', $orden);
+    } else {
+      if (isset($orden)) // si ingresa una orden la busca y le da prioridad a esa orden
+      {
+        $pedido = PedidoPostre::where('estado', 'pendiente')->where('orden', $orden)->get()->first();
+        $retorno = self::CambiarEstado($pedido, 'pendiente', 'en preparacion', $orden);
+      } else {
+        $pedido = PedidoPostre::where('estado', 'pendiente')->get()->first(); //obtengo el pedido que le sigue por orden
+        $retorno = self::CambiarEstado($pedido, 'pendiente', 'en preparacion', '');
+      }
+    }
+    return $response->withJson($retorno, 200);
+  }
+
+  public static function CambiarEstadoPostres($pedido, $estadoActual, $estadoSiguiente, $ordenABuscar)
+  {
+    if ($pedido) {
+      $pedidosACambiarEstado = PedidoPostre::where('orden', $pedido->orden)->get(); //obtengo todos los pedidos con la misma orden
+      foreach ($pedidosACambiarEstado as $indice => $pedido) {
+        $pedido->estado = $estadoSiguiente; //cambiamos su estado
+        $pedido->save(); //guardamos los cambios
+      }
+      return "todo ok";
+    } else {
+      if ($ordenABuscar) {
+        return 'No hay pedidos con orden: ' . $ordenABuscar;
+      } else {
+        return 'No hay pedidos ' . $estadoActual;
+      }
+    }
+  }
+
+  public static function TerminarPedidoPostres($request, $response, $args)
+  {
+    $orden = $args["orden"];
+    $retorno = "";
+    if (is_null($orden)) {
+      $pedido = PedidoPostre::where('estado', 'en preparacion')->get()->first(); //obtengo el pedido que le sigue por orden
+      $retorno = self::CambiarEstado($pedido, 'en preparacion', 'listo para servir', $orden);
+    } else {
+      if (isset($orden)) // si ingresa una orden la busca y le da prioridad a esa orden
+      {
+        $pedido = PedidoPostre::where('estado', 'en preparacion')->where('orden', $orden)->get()->first(); //obtengo el pedido que le sigue por orden
+        $retorno = self::CambiarEstado($pedido, 'en preparacion', 'listo para servir', $orden);
+      } else {
+        $pedido = PedidoPostre::where('estado', 'en preparacion')->get()->first(); //obtengo el pedido que le sigue por orden
         $retorno = self::CambiarEstado($pedido, 'en preparacion', 'listo para servir', '');
       }
     }

@@ -9,7 +9,7 @@ use Middleware\RoleMiddleware;
 use Middleware\AuthMiddleware;
 use Middleware\RegistroMiddleware;
 return function(App $app){
-$app->group('/Cocinero',function(){
+$app->group('/Cocinero/Comidas',function(){
     // $this->get('/',CocinerosController::class.':PedidosPendientes');
     // $this->post('/CocinarPedido',CocinerosController::class.':CocinarPedido');
     // $this->post('/TerminarPedido',CocinerosController::class.':TerminarPedido');
@@ -24,4 +24,12 @@ $app->group('/Cocinero',function(){
 })/*->add(AuthMiddleware::class.':IsLoggedIn')
 ->add(RoleMiddleware::class . ':esCocinero')
 ->add(RegistroMiddleware::class . ':guardarOperacion')*/;
+
+$app->group('/Cocinero/Postres',function(){
+    $this->get('/',CocinerosController::class.':PedidosPostres');
+     $this->get('/pendientes',CocinerosController::class.':PedidosPendientesPostres');
+     $this->get('/enPreparacion',CocinerosController::class.':PedidosEnPreparacionPostres');
+     $this->post('/PrepararPedido/{orden}',CocinerosController::class.':PrepararPedidoPostres');
+     $this->post('/TerminarPedido/{orden}',CocinerosController::class.':TerminarPedidoPostres');
+ })
 };
