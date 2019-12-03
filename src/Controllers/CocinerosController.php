@@ -10,6 +10,14 @@ use Controllers\MozosController;
 
 class CocinerosController //implements IController
 {
+
+  public static function obtenerImagenPorId($request, $response, $args)
+  {
+    $id = $args["id"];
+
+    var_dump(PedidoPostre::where('id', $id)->first());
+  }
+
   public static function PedidosEnPreparacion($request, $response, $args)
   {
     $pedidosPendientes = PedidoComida::where('estado', 'en preparacion')->get();
@@ -170,6 +178,7 @@ class CocinerosController //implements IController
     }
   }
 
+
   public static function TerminarPedidoPostres($request, $response, $args)
   {
     $orden = $args["orden"];
@@ -193,7 +202,6 @@ class CocinerosController //implements IController
     return $response->withJson($retorno, 200);
   }
 
-  
 
 
 
@@ -221,7 +229,8 @@ class CocinerosController //implements IController
 
 
 
-  
+
+
   // public static function PedidosPendientes($request,$response,$args){
   //   echo '<h4>Comidas</h4>';
   //     $pedidosPendientesCocina=PedidoComida::where('estado','pendiente')->get();
@@ -391,5 +400,5 @@ class CocinerosController //implements IController
   //   }
   // }
 
-  
+
 }

@@ -26,6 +26,7 @@ $app->group('/Cocinero',function(){
 ->add(RegistroMiddleware::class . ':guardarOperacion')*/
 $app->group('/Cocinero/Postres',function(){
     $this->get('/',CocinerosController::class.':PedidosPostres');
+    $this->get('/imagen/{id}',CocinerosController::class.':obtenerImagenPorId');
      $this->get('/pendientes',CocinerosController::class.':PedidosPendientesPostres');
      $this->get('/enPreparacion',CocinerosController::class.':PedidosEnPreparacionPostres');
      $this->post('/PrepararPedido/{orden}',CocinerosController::class.':PrepararPedidoPostres');
