@@ -10,13 +10,8 @@ use Models\Cliente;
 use Models\Encuesta;
 use Models\PedidoMozo;
 use Models\Mesa;
-use Helpers\JWTAuth;
-use Helpers\AppConfig as Config;
-use Helpers\FilesHelper as Files;
-use Helpers\ImagesHelper as Images;
 
 use Controllers\MozosController;
-use Illuminate\Database\Capsule\Manager as Capsule;
 
 class ClientesController //implements IController
 {
