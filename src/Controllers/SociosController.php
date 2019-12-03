@@ -31,7 +31,7 @@ class SociosController
   {
    //
    $nombre = $args["nombre"];
-   $clientes=Cliente::where("nombre",$nombre)->get();
+   $clientes=Cliente::where("nombre",$nombre)->where("select max(fecha) from clientes")->get();
    return $response->withJson(json_encode($clientes), 200);
   }
   public static function VerPedidos($request, $response, $args)
