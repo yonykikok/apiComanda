@@ -16,11 +16,7 @@ use Controllers\MozosController;
 class ClientesController //implements IController
 {
 
-  public static function obtenerPedidosPorUsuario($request, $response, $args)
-  {
-   //
-   return $response->withJson("sadsadsa", 401);
-  }
+ 
   public static function GetAll($request, $response, $args)
   {
     return json_encode(Cliente::all());
@@ -274,5 +270,11 @@ class ClientesController //implements IController
       echo 'no ingreso la mesa';
     }
     return $retorno;
+  }
+  public static function obtenerPedidosPorUsuario($request, $response, $args)
+  {
+   //
+   $nombre = $args["nombre"];
+   return $response->withJson($nombre , 200);
   }
 }
