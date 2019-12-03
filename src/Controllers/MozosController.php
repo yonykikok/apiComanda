@@ -241,12 +241,12 @@ class MozosController //implements IController
           PedidoBebida::CambiarEstado($pedido->orden, 'listo para servir', 'entregado');
           PedidoPostre::CambiarEstado($pedido->orden, 'listo para servir', 'entregado');
           PedidoTrago::CambiarEstado($pedido->orden, 'listo para servir', 'entregado');
-          echo ($pedido);
+          return $response->withJson("todo ok",200);
         } else {
           if ($pedido->estado == 'entregado') {
-            echo 'el pedido ya fue entregado.';
+            return $response->withJson("el pedido ya fue entregado.",200);
           } else {
-            echo 'aun no se puede entregar ese pedido, hay platos que no se terminaron.';
+           return $response->withJson('aun no se puede entregar ese pedido, hay platos que no se terminaron.', 200);
           }
         }
       }
