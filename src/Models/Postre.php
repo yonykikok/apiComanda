@@ -69,13 +69,13 @@ class Postre extends Model
         }
       }
     } else {
-      // $postre = new PedidoPostre;
-      // $postre->cantidad = 0;
-      // $postre->idPostre = 1000;
-      // $postre->orden = $numeroDeOrden;
-      // $postre->estado = 'pendiente';
-      // self::PostreVendidaMasMas($postre->idPostre, $postre->cantidad);
-      // $postre->save();
+      $postre = new PedidoPostre;
+      $postre->cantidad = 0;
+      $postre->idPostre = 1000;
+      $postre->orden = $numeroDeOrden;
+      $postre->estado = 'pendiente';
+      self::PostreVendidaMasMas($postre->idPostre, $postre->cantidad);
+      $postre->save();
     }
   }
   public static function DescontarVendidas($orden)

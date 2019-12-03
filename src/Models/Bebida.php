@@ -83,13 +83,13 @@ class Bebida extends Model
   }
   else
     {
-      // $bebida=new PedidoBebida;
-      // $bebida->cantidad=0;
-      // $bebida->idBebida=1000;
-      // $bebida->orden=$numeroDeOrden;  
-      // $bebida->estado='pendiente';
-      // self::BebidaVendidaMasMas($bebida->idBebida,$bebida->cantidad);
-      // $bebida->save();
+      $bebida=new PedidoBebida;
+      $bebida->cantidad=0;
+      $bebida->idBebida=1000;
+      $bebida->orden=$numeroDeOrden;  
+      $bebida->estado='pendiente';
+      self::BebidaVendidaMasMas($bebida->idBebida,$bebida->cantidad);
+      $bebida->save();
     }
   }
   public static function DescontarVendidas($orden)

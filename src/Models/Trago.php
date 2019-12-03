@@ -71,13 +71,13 @@ class Trago extends Model
         }
       }
     } else {
-      //  $trago = new PedidoTrago;
-      //  $trago->cantidad = 0;
-      //  $trago->idTrago = 1000;
-      //  $trago->orden = $numeroDeOrden;
-      //  $trago->estado = 'pendiente';
-      //  self::TragoVendidaMasMas($trago->idTrago, $trago->cantidad);
-      //  $trago->save();
+       $trago = new PedidoTrago;
+       $trago->cantidad = 0;
+       $trago->idTrago = 1000;
+       $trago->orden = $numeroDeOrden;
+       $trago->estado = 'pendiente';
+       self::TragoVendidaMasMas($trago->idTrago, $trago->cantidad);
+       $trago->save();
     }
   }
   public static function DescontarVendidas($orden)
