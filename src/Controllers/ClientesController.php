@@ -38,11 +38,24 @@ class ClientesController //implements IController
   {
     $informacion = $request->getParsedBody();
     $pedido = PedidoMozo::where("mesa", $informacion['mesa'])->where("orden", $informacion['orden'])->first();
-    return $response->withJson(json_encode($pedido), 200);
-    // var_dump($pedido);
+    if (!is_null($pedido)) {
+      $demora = 0;
+      $estadoComida = PedidoComida::where('orden', $informacion['orden'])->get('estado')->first();
+      $estadoPostre = PedidoPostre::where('orden', $informacion['orden'])->get('estado')->first();
+      $estadoTrago = PedidoTrago::where('orden', $informacion['orden'])->get('estado')->first();
+      $estadoBebida = PedidoBebida::where('orden', $informacion['orden'])->get('estado')->first();
 
-    // MozosController::mostrarTodosLosPedidos($informacion['orden']);
+      $demoraComida = self::calcularDemoraPorPedido($estadoComida['estado'], 20, 10, 1);
+      $demoraPostre = self::calcularDemoraPorPedido($estadoPostre['estado'], 10, 5, 1);
+      $demoraTrago = self::calcularDemoraPorPedido($estadoTrago['estado'], 8, 2, 1);
+      $demoraBebida = self::calcularDemoraPorPedido($estadoBebida['estado'], 5, 2, 1);
+      $demora = $demoraComida + $demoraBebida + $demoraPostre + $demoraTrago;
+      $pedido['demora'] = $demora;
+    }
+    return $response->withJson(json_encode($pedido), 200);
   }
+
+
   public static function verEstado($request, $response, $args)
   {
     $informacion = $request->getParsedBody();
