@@ -17,9 +17,13 @@ class UsuariosController
 {
   public static function VerUsuarios($request, $response, $args)
   {
-    $usuarios= User::all();
+    $usuarios = User::all();
     foreach ($pedidos as $indice => $pedido) {
-      echo "Pedido '".$pedido->orden."' de la mesa ".$pedido->mesa.' '.$pedido->estado.'<br>';
+      echo "Pedido '" . $pedido->orden . "' de la mesa " . $pedido->mesa . ' ' . $pedido->estado . '<br>';
     }
+  }
+  public static function obtenerPedidosPorUsuario($request, $response, $args)
+  { 
+    var_dump($args["nombre"]);
   }
 }
