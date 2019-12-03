@@ -21,9 +21,7 @@ class AuthController
   public static function LogIn($request, $response, $args)
   {
     $data = json_decode($request->getBody());
-    // var_dump($data);
-    // echo "HOLA";
-    // die();
+ 
     if (!isset($data->nombre) || !isset($data->clave))
       return $response->withJson("ingrese nombre/clave", 400);
 
