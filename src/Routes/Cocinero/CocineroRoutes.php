@@ -16,13 +16,6 @@ $app->group('/Cocinero',function(){
     // $this->post('/PrepararPostre',CocinerosController::class.':PrepararPostre');
     // $this->post('/TerminarPedidoPostre',CocinerosController::class.':TerminarPedidoPostre');
 
-    $this->get('/postres/',CocinerosController::class.':PedidosPostres');
-    $this->get('/postres/pendientes',CocinerosController::class.':PedidosPendientesPostres');
-    $this->get('/postres/enPreparacion',CocinerosController::class.':PedidosEnPreparacionPostres');
-    $this->post('/postres/PrepararPedido/{orden}',CocinerosController::class.':PrepararPedidoPostres');
-    $this->post('/postres/TerminarPedido/{orden}',CocinerosController::class.':TerminarPedidoPostres');
-
-    
     $this->get('/',CocinerosController::class.':Pedidos');
     $this->get('/pendientes',CocinerosController::class.':PedidosPendientes');
     $this->get('/enPreparacion',CocinerosController::class.':PedidosEnPreparacion');
@@ -31,5 +24,11 @@ $app->group('/Cocinero',function(){
 })/*->add(AuthMiddleware::class.':IsLoggedIn')
 ->add(RoleMiddleware::class . ':esCocinero')
 ->add(RegistroMiddleware::class . ':guardarOperacion')*/;
-
+$app->group('/Cocinero/Postres',function(){
+    $this->get('/',CocinerosController::class.':PedidosPostres');
+     $this->get('/pendientes',CocinerosController::class.':PedidosPendientesPostres');
+     $this->get('/enPreparacion',CocinerosController::class.':PedidosEnPreparacionPostres');
+     $this->post('/PrepararPedido/{orden}',CocinerosController::class.':PrepararPedidoPostres');
+     $this->post('/TerminarPedido/{orden}',CocinerosController::class.':TerminarPedidoPostres');
+ });
 };
