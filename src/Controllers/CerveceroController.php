@@ -2,6 +2,7 @@
 
 namespace Controllers;
 
+use Models\Bebida;
 use Models\PedidoBebida;
 
 class CerveceroController //implements IController
@@ -21,7 +22,7 @@ class CerveceroController //implements IController
     $pedidosPendientes = PedidoBebida::all();
     foreach ($pedidosPendientes as $key => $value) {
       if ($value->idTrago != 1000) {
-        $value['imagenPedido'] = Trago::where('id', $value->idTrago)->first()->imagen;
+        $value['imagenPedido'] = Bebida::where('id', $value->idTrago)->first()->imagen;
       }
     }
     if (count($pedidosPendientes) > 0) {
