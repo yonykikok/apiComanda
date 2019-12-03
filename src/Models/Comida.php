@@ -85,13 +85,13 @@ class Comida extends Model
     }
     else
       {
-        $comida=new PedidoComida;
-        $comida->cantidad=0;
-        $comida->idComida=1000;
-        $comida->orden=$numeroDeOrden;  
-        $comida->estado='pendiente';
-            self::ComidaVendidaMasMas($comida->idComida,$comida->cantidad);
-            $comida->save();
+        // $comida=new PedidoComida;
+        // $comida->cantidad=0;
+        // $comida->idComida=1000;
+        // $comida->orden=$numeroDeOrden;  
+        // $comida->estado='pendiente';
+        //     self::ComidaVendidaMasMas($comida->idComida,$comida->cantidad);
+        //     $comida->save();
       }
   }
   public static function DescontarVendidas($orden)
