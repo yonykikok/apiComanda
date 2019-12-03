@@ -176,15 +176,15 @@ class CocinerosController //implements IController
     $retorno = "";
     if (is_null($orden)) {
       $pedido = PedidoPostre::where('estado', 'en preparacion')->get()->first(); //obtengo el pedido que le sigue por orden
-      $retorno = self::CambiarEstado($pedido, 'en preparacion', 'listo para servir', $orden);
+      $retorno = self::CambiarEstadoPostres($pedido, 'en preparacion', 'listo para servir', $orden);
     } else {
       if (isset($orden)) // si ingresa una orden la busca y le da prioridad a esa orden
       {
         $pedido = PedidoPostre::where('estado', 'en preparacion')->where('orden', $orden)->get()->first(); //obtengo el pedido que le sigue por orden
-        $retorno = self::CambiarEstado($pedido, 'en preparacion', 'listo para servir', $orden);
+        $retorno = self::CambiarEstadoPostres($pedido, 'en preparacion', 'listo para servir', $orden);
       } else {
         $pedido = PedidoPostre::where('estado', 'en preparacion')->get()->first(); //obtengo el pedido que le sigue por orden
-        $retorno = self::CambiarEstado($pedido, 'en preparacion', 'listo para servir', '');
+        $retorno = self::CambiarEstadoPostres($pedido, 'en preparacion', 'listo para servir', '');
       }
     }
     if (!is_null($pedido)) {
