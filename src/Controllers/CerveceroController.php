@@ -9,7 +9,7 @@ class CerveceroController //implements IController
 {
   public static function PedidosEnPreparacion($request, $response, $args)
   {
-    $pedidosPendientes = PedidoBebida::where('estado', 'en preparacion')->where('id','!=',1000)->get();
+    $pedidosPendientes = PedidoBebida::where('estado', 'en preparacion')->where('idBebida','!=',1000)->get();
     if (count($pedidosPendientes) > 0) {
       return json_encode($pedidosPendientes);
     } else {
@@ -19,7 +19,7 @@ class CerveceroController //implements IController
 
   public static function Pedidos($request, $response, $args)
   {
-    $pedidosPendientes = PedidoBebida::where('id','!=',1000)->get();
+    $pedidosPendientes = PedidoBebida::where('idBebida','!=',1000)->get();
     foreach ($pedidosPendientes as $key => $value) {
       if ($value->idBebida != 1000) {
         $value['imagenPedido'] = Bebida::where('id', $value->idBebida)->first()->imagen;
@@ -33,7 +33,7 @@ class CerveceroController //implements IController
   }
   public static function PedidosPendientes($request, $response, $args)
   {
-    $pedidosPendientes = PedidoBebida::where('estado', 'pendiente')->where('id','!=',1000)->get();
+    $pedidosPendientes = PedidoBebida::where('estado', 'pendiente')->where('idBebida','!=',1000)->get();
     if (count($pedidosPendientes) > 0) {
       return json_encode($pedidosPendientes);
     } else {
