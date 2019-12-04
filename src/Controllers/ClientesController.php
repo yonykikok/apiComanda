@@ -10,6 +10,7 @@ use Models\Cliente;
 use Models\Encuesta;
 use Models\PedidoMozo;
 use Models\Mesa;
+use Models\Mozo;
 
 use Controllers\MozosController;
 
@@ -21,7 +22,22 @@ class ClientesController //implements IController
   {
     return json_encode(Cliente::all());
   }
+  public static function obtenerPedidoPorOrdenYMesa($request, $response, $args)
+  {
+    $informacion = $request->getParsedBody();
+    if (isset($informacion['mesa']) && isset($informacion['orden'])) {
+      $orden =  Mozo::where("mesa", $informacion['mesa'])->where('orden', $informacion['orden'])->first();
+      if ($orden) {
+        return $response->withJson(json_encode($orden), 200);
+      } else {
 
+        return $response->withJson("Sin pedido", 200);
+      }
+    } else {
+
+      return $response->withJson("Ingrese mesa y orden", 200);
+    }
+  }
   public static function GetOne($request, $response, $args)
   {
     $id = $request->getAttributes()["id"];
@@ -219,7 +235,7 @@ class ClientesController //implements IController
       }
     } else {
 
-      return $response->withJson($datosDeLaEncuesta['mesa'] . " " . $datosDeLaEncuesta['orden']." no coincide con un pedido", 200);
+      return $response->withJson($datosDeLaEncuesta['mesa'] . " " . $datosDeLaEncuesta['orden'] . " no coincide con un pedido", 200);
     }
   }
 

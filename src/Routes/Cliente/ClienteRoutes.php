@@ -16,5 +16,6 @@ return function (App $app) {
     });
     $app->group('/Cliente', function () {
         $this->post('/responderEncuesta', ClientesController::class . ':GuardarEncuesta');
+        $this->post('/buscarPedido', ClientesController::class . ':obtenerPedidoPorOrdenYMesa');
     });
 };
