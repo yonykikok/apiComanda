@@ -197,6 +197,7 @@ class ClientesController //implements IController
   {
     $datosDeLaEncuesta =  $request->getParsedBody();
     var_dump($datosDeLaEncuesta);
+    $response->withJson("Encuesta Enviada", 200);
     // if (self::EsUnaEncuestaValida($datosDeLaEncuesta)) {
     //   if (self::SonDatosValidos($datosDeLaEncuesta)) {
     //     $pedidoMozo = PedidoMozo::where('mesa', $datosDeLaEncuesta['mesa'])->where('orden', $datosDeLaEncuesta['orden'])->first();
