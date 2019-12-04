@@ -186,7 +186,6 @@ class MozosController //implements IController
   public static function CobrarPedido($request, $response, $args)
   {
     $data = $request->getParsedBody();
-    var_dump($data['facturacion']);
     if (isset($data['mesa']) && isset($data['orden'])) //si ingreso mesa y orden
     {
       $pedido = PedidoMozo::where('orden', $data['orden'])->where('mesa', $data['mesa'])->first(); //buscamos el pedido
