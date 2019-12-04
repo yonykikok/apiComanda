@@ -30,7 +30,7 @@ class SociosController
 
   public static function PedidosEsperandoCierre($request, $response, $args)
   {
-    $mesas = Mesa::where('estado', 'cliente pagando')->get();
+    $mesas = Mozo::where('estado', 'cliente pagando')->get();
     if ($mesas) {
       return $response->withJson(json_encode($mesas, 200));
     }
