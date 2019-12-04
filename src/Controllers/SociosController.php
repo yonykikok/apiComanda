@@ -103,12 +103,20 @@ class SociosController
       $pedido = PedidoMozo::where('mesa', $data['mesa'])->where('orden', $data['orden'])->first();
       $mesa = Mesa::where('mesa', $data['mesa'])->first();
       if (!is_null($pedido) && count($pedido) > 0 && !is_null($mesa) && count($mesa) > 0) {
-        if ($mesa->estado == 'cliente pagando') {
+        if ($mesa->estado == 'cliente pagando' && $pedido->estado == 'cliente pagando') {
           $mesa->estado = 'cerrada';
-          $pedido->estado='cerrado';
+          $pedido->estado = 'cerrado';
           $pedido->save();
           $mesa->save();
+          return $response->withJson("Mesa Cerrada", 200);
         }
+        else{
+          return $response->withJson("El cliente aun no esta pagando", 200);
+        }
+      }
+      else
+      {
+        return $response->withJson("Mesa no encontrada", 400);
       }
     }
   }
