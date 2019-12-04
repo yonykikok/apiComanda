@@ -193,11 +193,13 @@ class MozosController //implements IController
         $clienteACobrar = Cliente::where('mesa', $data['mesa'])->first(); //buscamos al cliente de esa mesa
         $mesa = Mesa::where('mesa', $data['mesa'])->first(); //traemos la mesa para cambiar el estado
         if (!is_null($clienteACobrar) && count($clienteACobrar) > 0 && !is_null($mesa) && count($mesa) > 0) {
-         // self::CalcularTotalAPagarPorElPedido($data['orden'], true);
+          // self::CalcularTotalAPagarPorElPedido($data['orden'], true);
           if ($mesa->estado == 'comiendo' && $pedido->estado != 'cancelado') {
+            $pedido->estado = 'cliente pagando';
+            $pedido->save();
             Mesa::cambiarEstadoMesa($clienteACobrar->mesa, 'cliente pagando');
-              return $response->withJson("todo ok", 200);
-            } else {
+            return $response->withJson("todo ok", 200);
+          } else {
             if ($mesa->estado != 'cliente pagando') {
               return $response->withJson("La mesa aun no recibio su pedido.<br>", 401);
             } else {
@@ -242,12 +244,12 @@ class MozosController //implements IController
           PedidoBebida::CambiarEstado($pedido->orden, 'listo para servir', 'entregado');
           PedidoPostre::CambiarEstado($pedido->orden, 'listo para servir', 'entregado');
           PedidoTrago::CambiarEstado($pedido->orden, 'listo para servir', 'entregado');
-          return $response->withJson("todo ok",200);
+          return $response->withJson("todo ok", 200);
         } else {
           if ($pedido->estado == 'entregado') {
-            return $response->withJson("el pedido ya fue entregado.",200);
+            return $response->withJson("el pedido ya fue entregado.", 200);
           } else {
-           return $response->withJson('aun no se puede entregar ese pedido, hay platos que no se terminaron.', 200);
+            return $response->withJson('aun no se puede entregar ese pedido, hay platos que no se terminaron.', 200);
           }
         }
       }
