@@ -213,9 +213,9 @@ class ClientesController //implements IController
     //     $encuesta->puntuacionTotal = $encuesta->puntosmesa + $encuesta->puntosmozo + $encuesta->puntoscocinero + $encuesta->puntosrestaurante;
     //     if (is_null(Encuesta::VerificarExistencia($encuesta))) {
     //       $encuesta->save();
-    //       $response->withJson("Encuesta Enviada", 200);
+    //      return $response->withJson("Encuesta Enviada", 200);
     //     } else {
-    //       $response->withJson("ya se registro su encuesta, gracias por venir.", 200);
+    //      return $response->withJson("ya se registro su encuesta, gracias por venir.", 200);
     //     }
     //   }
     // }
