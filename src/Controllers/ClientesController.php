@@ -196,8 +196,7 @@ class ClientesController //implements IController
   public static function GuardarEncuesta($request, $response, $args)
   {
     $datosDeLaEncuesta =  $request->getParsedBody();
-    var_dump($datosDeLaEncuesta);
-    die();
+    var_dump($request);
     // if (self::EsUnaEncuestaValida($datosDeLaEncuesta)) {
     //   if (self::SonDatosValidos($datosDeLaEncuesta)) {
     //     $pedidoMozo = PedidoMozo::where('mesa', $datosDeLaEncuesta['mesa'])->where('orden', $datosDeLaEncuesta['orden'])->first();
