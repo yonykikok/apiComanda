@@ -11,6 +11,7 @@ use Models\RegistroLogeo;
 use Models\PedidoMozo;
 use Models\Encuesta;
 use Models\Mesa;
+use Models\Mozo;
 use Models\Bebida;
 use Models\Trago;
 use Models\Comida;
