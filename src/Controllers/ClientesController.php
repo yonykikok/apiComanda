@@ -196,7 +196,7 @@ class ClientesController //implements IController
   public static function GuardarEncuesta($request, $response, $args)
   {
     $datosDeLaEncuesta = $request->getParsedBody();
-    return $response->withJson($datosDeLaEncuesta['mesa'] + " " + $datosDeLaEncuesta['orden'], 200);
+    return $response->withJson(json_encode($datosDeLaEncuesta['mesa']), 200);
 
     if (self::SonDatosValidos($datosDeLaEncuesta)) {
       $pedidoMozo = PedidoMozo::where('mesa', $datosDeLaEncuesta['mesa'])->where('orden', $datosDeLaEncuesta['orden'])->first();
