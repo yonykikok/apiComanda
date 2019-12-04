@@ -186,15 +186,15 @@ class MozosController //implements IController
   public static function CobrarPedido($request, $response, $args)
   {
     $data = $request->getParsedBody();
-    var_dump($data);
-  /*  if (isset($data['mesa']) && isset($data['orden'])) //si ingreso mesa y orden
+    var_dump($data['facturacion']);
+    if (isset($data['mesa']) && isset($data['orden'])) //si ingreso mesa y orden
     {
       $pedido = PedidoMozo::where('orden', $data['orden'])->where('mesa', $data['mesa'])->first(); //buscamos el pedido
       if (!is_null($pedido) && count($pedido) > 0) {
         $clienteACobrar = Cliente::where('mesa', $data['mesa'])->first(); //buscamos al cliente de esa mesa
         $mesa = Mesa::where('mesa', $data['mesa'])->first(); //traemos la mesa para cambiar el estado
         if (!is_null($clienteACobrar) && count($clienteACobrar) > 0 && !is_null($mesa) && count($mesa) > 0) {
-          self::CalcularTotalAPagarPorElPedido($data['orden'], true);
+         // self::CalcularTotalAPagarPorElPedido($data['orden'], true);
           if ($mesa->estado == 'comiendo' && $pedido->estado != 'cancelado') {
             Mesa::cambiarEstadoMesa($clienteACobrar->mesa, 'cliente pagando');
               return $response->withJson("todo ok", 200);
@@ -213,7 +213,7 @@ class MozosController //implements IController
       }
     } else {
       return $response->withJson("Ingrese la mesa y orden a la cual cobrar<br>", 401);
-    }*/
+    }
   }
   public static function CalcularTotalAPagarPorElPedido($orden, $bool)
   {
