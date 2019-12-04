@@ -99,14 +99,14 @@ class SociosController
   public static function CerrarMesa($request, $response, $args)
   {
     $data = $request->getParsedBody();
-    if (isset($data['mesa'])) {
-      $pedido = PedidoMozo::where('mesa', $data['mesa'])->first();
+    if (isset($data['mesa']) && isset($data['mesa'])) {
+      $pedido = PedidoMozo::where('mesa', $data['mesa'])->where('orden', $data['orden'])->first();
       $mesa = Mesa::where('mesa', $data['mesa'])->first();
       if (!is_null($pedido) && count($pedido) > 0 && !is_null($mesa) && count($mesa) > 0) {
-        $totalACobrar = MozosController::CalcularTotalAPagarPorElPedido($pedido->orden, true);
-
         if ($mesa->estado == 'cliente pagando') {
           $mesa->estado = 'cerrada';
+          $pedido->estado='cerrado';
+          $pedido->save();
           $mesa->save();
         }
       }
