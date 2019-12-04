@@ -196,7 +196,8 @@ class ClientesController //implements IController
   public static function GuardarEncuesta($request, $response, $args)
   {
     $datosDeLaEncuesta = $request->getParsedBody();
-
+    var_dump($datosDeLaEncuesta);
+    die();
     if (self::EsUnaEncuestaValida($datosDeLaEncuesta)) {
       if (self::SonDatosValidos($datosDeLaEncuesta)) {
         $pedidoMozo = PedidoMozo::where('mesa', $datosDeLaEncuesta['mesa'])->where('orden', $datosDeLaEncuesta['orden'])->first();
@@ -212,9 +213,9 @@ class ClientesController //implements IController
         $encuesta->puntuacionTotal = $encuesta->puntosmesa + $encuesta->puntosmozo + $encuesta->puntoscocinero + $encuesta->puntosrestaurante;
         if (is_null(Encuesta::VerificarExistencia($encuesta))) {
           $encuesta->save();
-          echo 'encuesta enviada.';
+          $response->withJson("Encuesta Enviada", 200);
         } else {
-          echo 'ya se registro su encuesta, gracias por venir.';
+          $response->withJson("ya se registro su encuesta, gracias por venir.", 200);
         }
       }
     }
