@@ -8,7 +8,7 @@ use Controllers\ClientesController;
 use Middleware\RoleMiddleware;
 
 return function(App $app){
-$app->group('/Cliente/Pedido',function(){
+$app->group('/Cliente',function(){
     $this->get('/verEstado',ClientesController::class.':verEstado');
     $this->get('/verDemora',ClientesController::class.':calcularDemora');
     $this->post('/',ClientesController::class.':VerPedido');

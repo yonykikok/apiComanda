@@ -195,7 +195,7 @@ class ClientesController //implements IController
 
   public static function GuardarEncuesta($request, $response, $args)
   {
-    $datosDeLaEncuesta = $request->getParsedBody();
+    $datosDeLaEncuesta =  $request->getParsedBody();
     var_dump($datosDeLaEncuesta);
     die();
     // if (self::EsUnaEncuestaValida($datosDeLaEncuesta)) {
