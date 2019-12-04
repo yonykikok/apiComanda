@@ -12,6 +12,9 @@ return function (App $app) {
         $this->get('/verEstado', ClientesController::class . ':verEstado');
         $this->get('/verDemora', ClientesController::class . ':calcularDemora');
         $this->post('/', ClientesController::class . ':VerPedido');
+        // $this->post('/responderEncuesta', ClientesController::class . ':GuardarEncuesta');
+    });
+    $app->group('/Cliente', function () {
         $this->post('/responderEncuesta', ClientesController::class . ':GuardarEncuesta');
     });
 };
