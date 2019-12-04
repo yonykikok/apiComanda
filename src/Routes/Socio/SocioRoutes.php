@@ -13,6 +13,7 @@ return function(App $app)
     $this->get('/', SociosController::class . ':VerPedidos');
     $this->get('/EnPreparacion', SociosController::class . ':VerPedidosEnPreparacion');
     $this->get('/Terminados', SociosController::class . ':VerPedidosTerminados');
+    $this->get('/EsperandoCierre', SociosController::class . ':PedidosEsperandoCierre');
     $this->post('/PorOrden', SociosController::class . ':VerPedidoPorOrden');
     $this->post('/CerrarMesa', SociosController::class . ':CerrarMesa');
     $this->post('/LiberarMesas', SociosController::class . ':LiberarMesasCerradas');

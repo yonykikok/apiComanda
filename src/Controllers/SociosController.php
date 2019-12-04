@@ -27,6 +27,15 @@ use Illuminate\Database\Capsule\Manager as Capsule;
 
 class SociosController
 {
+
+  public static function PedidosEsperandoCierre($request, $response, $args)
+  {
+    $mesas = Mesa::where('estado', 'cliente pagando')->get();
+    if ($mesas) {
+      return $response->withJson(json_encode($mesas, 200));
+    }
+    return $response->withJson("Sin cierres pendientes", 200);
+  }
   public static function obtenerPedidosPorUsuario($request, $response, $args)
   {
     //
