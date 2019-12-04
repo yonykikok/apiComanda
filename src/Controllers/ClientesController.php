@@ -196,26 +196,24 @@ class ClientesController //implements IController
   public static function GuardarEncuesta($request, $response, $args)
   {
     $datosDeLaEncuesta = $request->getParsedBody();
-    return $response->withJson(json_encode($datosDeLaEncuesta['mesa']), 200);
+    // return $response->withJson(json_encode($datosDeLaEncuesta['mesa']), 200);
 
-    if (self::SonDatosValidos($datosDeLaEncuesta)) {
-      $pedidoMozo = PedidoMozo::where('mesa', $datosDeLaEncuesta['mesa'])->where('orden', $datosDeLaEncuesta['orden'])->first();
-      $encuesta = new Encuesta();
-      $encuesta->idMozo = $pedidoMozo->id;
-      $encuesta->mesa = $pedidoMozo->mesa;
-      $encuesta->orden = $pedidoMozo->orden;
-      $encuesta->puntosmesa = $datosDeLaEncuesta['puntosMesa'];
-      $encuesta->puntosmozo = $datosDeLaEncuesta['puntosMozo'];
-      $encuesta->puntoscocinero = $datosDeLaEncuesta['puntosCocinero'];
-      $encuesta->puntosrestaurante = $datosDeLaEncuesta['puntosRestaurante'];
-      $encuesta->experiencia = $datosDeLaEncuesta['experiencia'];
-      $encuesta->puntuacionTotal = $encuesta->puntosmesa + $encuesta->puntosmozo + $encuesta->puntoscocinero + $encuesta->puntosrestaurante;
-      if (is_null(Encuesta::VerificarExistencia($encuesta))) {
-        //$encuesta->save();
-        return $response->withJson("Encuesta Enviada", 200);
-      } else {
-        return $response->withJson("ya se registro su encuesta, gracias por venir.", 200);
-      }
+    $pedidoMozo = PedidoMozo::where('mesa', $datosDeLaEncuesta['mesa'])->where('orden', $datosDeLaEncuesta['orden'])->first();
+    $encuesta = new Encuesta();
+    $encuesta->idMozo = $pedidoMozo->id;
+    $encuesta->mesa = $pedidoMozo->mesa;
+    $encuesta->orden = $pedidoMozo->orden;
+    $encuesta->puntosmesa = $datosDeLaEncuesta['puntosMesa'];
+    $encuesta->puntosmozo = $datosDeLaEncuesta['puntosMozo'];
+    $encuesta->puntoscocinero = $datosDeLaEncuesta['puntosCocinero'];
+    $encuesta->puntosrestaurante = $datosDeLaEncuesta['puntosRestaurante'];
+    $encuesta->experiencia = $datosDeLaEncuesta['experiencia'];
+    $encuesta->puntuacionTotal = $encuesta->puntosmesa + $encuesta->puntosmozo + $encuesta->puntoscocinero + $encuesta->puntosrestaurante;
+    if (is_null(Encuesta::VerificarExistencia($encuesta))) {
+      //$encuesta->save();
+      return $response->withJson("Encuesta Enviada", 200);
+    } else {
+      return $response->withJson("ya se registro su encuesta, gracias por venir.", 200);
     }
   }
 
