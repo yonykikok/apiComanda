@@ -99,7 +99,8 @@ class SociosController
   public static function CerrarMesa($request, $response, $args)
   {
     $data = $request->getParsedBody();
-    var_dump($data);
+    var_dump($data['mesa']);
+    var_dump($data['orden']);
     if (isset($data['mesa']) && isset($data['mesa'])) {
       $pedido = PedidoMozo::where('mesa', $data['mesa'])->where('orden', $data['orden'])->first();
       $mesa = Mesa::where('mesa', $data['mesa'])->first();
@@ -117,12 +118,12 @@ class SociosController
       }
       else
       {
-      return $response->withJson("El pedido o la mesa no se encontro.", 400);
+      return $response->withJson("El pedido o la mesa no se encontro.", 200);
     }
     }
     else{
       
-      return $response->withJson("Mesa no encontrada", 400);
+      return $response->withJson("Mesa no encontrada", 200);
     }
   }
   public static function MesaMasUsada($request, $response, $args)
