@@ -196,7 +196,8 @@ class MozosController //implements IController
           self::CalcularTotalAPagarPorElPedido($data['orden'], true);
           if ($mesa->estado == 'comiendo' && $pedido->estado != 'cancelado') {
             Mesa::cambiarEstadoMesa($clienteACobrar->mesa, 'cliente pagando');
-          } else {
+              return $response->withJson("todo ok", 200);
+            } else {
             if ($mesa->estado != 'cliente pagando') {
               return $response->withJson("La mesa aun no recibio su pedido.<br>", 401);
             } else {
