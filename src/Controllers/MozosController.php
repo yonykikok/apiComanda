@@ -186,7 +186,8 @@ class MozosController //implements IController
   public static function CobrarPedido($request, $response, $args)
   {
     $data = $request->getParsedBody();
-    if (isset($data['mesa']) && isset($data['orden'])) //si ingreso mesa y orden
+    var_dump($data);
+  /*  if (isset($data['mesa']) && isset($data['orden'])) //si ingreso mesa y orden
     {
       $pedido = PedidoMozo::where('orden', $data['orden'])->where('mesa', $data['mesa'])->first(); //buscamos el pedido
       if (!is_null($pedido) && count($pedido) > 0) {
@@ -212,7 +213,7 @@ class MozosController //implements IController
       }
     } else {
       return $response->withJson("Ingrese la mesa y orden a la cual cobrar<br>", 401);
-    }
+    }*/
   }
   public static function CalcularTotalAPagarPorElPedido($orden, $bool)
   {
