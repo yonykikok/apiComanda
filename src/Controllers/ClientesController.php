@@ -217,7 +217,7 @@ class ClientesController //implements IController
 
       $pedidoMozo = PedidoMozo::where('mesa', $datosDeLaEncuesta['mesa'])->where('orden', $datosDeLaEncuesta['orden'])->first();
       $encuesta = new Encuesta();
-      $encuesta->idMozo = $pedidoMozo->id;
+      $encuesta->idMozo = $pedidoMozo->idMozo;
       $encuesta->mesa = $pedidoMozo->mesa;
       $encuesta->orden = $pedidoMozo->orden;
       $encuesta->puntosmesa = $datosDeLaEncuesta['puntosMesa'];

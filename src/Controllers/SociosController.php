@@ -239,7 +239,6 @@ class SociosController
             $mesaQueMasFacturo = $mesa;
             $facturacionMasAlta = $facturacionTotal;
             $mesaQueMasFacturo["total"] = $facturacionTotal;
-
           }
           $bandera = false;
           break;
