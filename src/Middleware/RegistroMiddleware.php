@@ -7,8 +7,9 @@ class RegistroMiddleware
 {
   public static function guardarOperacion($request, $response, $next)
   {
+     var_dump($request);
+     die();
      $data = TokenValidatorMiddleware::GetTokenData($request);
-     var_dump($data);
      if(!is_null($data))
      {
       $operacion=$_SERVER["REQUEST_URI"];
