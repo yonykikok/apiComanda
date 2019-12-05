@@ -128,7 +128,7 @@ class SociosController
     if (count($mesas) > 1) {
       return $response->withJson(json_encode($mesas), 200);
     } else if (count($mesas) == 1) {
-      return $response->withJson("La mesa mas usada es: " . $mesaMasUsada->mesa . " con " . $mesaMasUsada->usos . " usos", 200);
+      return $response->withJson($mesaMasUsada, 200);
     } else {
       return $response->withJson("Aun no se registran usos", 200);
     }
@@ -141,7 +141,7 @@ class SociosController
     if (count($mesas) > 1) {
       return $response->withJson(json_encode($mesas), 200);
     } else if (count($mesas) == 1) {
-      return $response->withJson("La mesa menos usada es: " . $mesaMenos->mesa . " con " . $mesaMenos->usos . " usos", 200);
+      return $response->withJson($mesaMenos, 200);
     } else {
       return $response->withJson("Aun no se registran usos", 200);
     }
