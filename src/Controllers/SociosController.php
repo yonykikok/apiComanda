@@ -151,21 +151,28 @@ class SociosController
   public static function FacturaMasAlta($request, $response, $args)
   {
     $pedidoConMayorFacturacion = PedidoMozo::where('facturacion', PedidoMozo::max('facturacion'))->get();
-
-    if (count($pedidoConMayorFacturacion) > 1) {
-      return $response->withJson(json_encode($pedidoConMayorFacturacion), 200);
+    if ($pedidoConMayorFacturacion) {
+      if (count($pedidoConMayorFacturacion) > 1) {
+        return $response->withJson(json_encode($pedidoConMayorFacturacion), 200);
+      } else {
+        return $response->withJson(json_encode($pedidoConMayorFacturacion[0]), 200);
+      }
     } else {
-      return  $response->withJson("La mesa con factura mas alta fue: " . $pedidoConMayorFacturacion[0]->mesa . " con un total de: $" . $pedidoConMayorFacturacion[0]->facturacion, 200);
+      return $response->withJson("Sin Facturaciones", 200);
     }
   }
   public static function FacturaMasBaja($request, $response, $args)
   {
     $pedidoConMayorFacturacion = PedidoMozo::where('facturacion', PedidoMozo::min('facturacion'))->get();
 
-    if (count($pedidoConMayorFacturacion) > 1) {
-      return $response->withJson(json_encode($pedidoConMayorFacturacion), 200);
+    if ($pedidoConMayorFacturacion) {
+      if (count($pedidoConMayorFacturacion) > 1) {
+        return $response->withJson(json_encode($pedidoConMayorFacturacion), 200);
+      } else {
+        return $response->withJson(json_encode($pedidoConMayorFacturacion[0]), 200);
+      }
     } else {
-      return  $response->withJson("La mesa con factura mas baja fue: " . $pedidoConMayorFacturacion[0]->mesa . " con un total de: $" . $pedidoConMayorFacturacion[0]->facturacion, 200);
+      return $response->withJson("Sin Facturaciones", 200);
     }
   }
 
@@ -231,6 +238,8 @@ class SociosController
             $facturacionAntes = $facturacionTotal;
             $mesaQueMasFacturo = $mesa;
             $facturacionMasAlta = $facturacionTotal;
+            $mesaQueMasFacturo["total"] = $facturacionTotal;
+
           }
           $bandera = false;
           break;
@@ -239,6 +248,7 @@ class SociosController
             $facturacionAntes = $facturacionTotal;
             $mesaQueMasFacturo = $mesa;
             $facturacionMasAlta = $facturacionTotal;
+            $mesaQueMasFacturo["total"] = $facturacionTotal;
           }
           $bandera = false;
           break;
