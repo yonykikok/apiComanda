@@ -18,7 +18,7 @@ return function(App $app)
     $this->post('/CerrarMesa', SociosController::class . ':CerrarMesa');
     $this->post('/LiberarMesas', SociosController::class . ':LiberarMesasCerradas');
     
-  })/*->add(RegistroMiddleware::class . ':guardarOperacion')*/;/*->add(AuthMiddleware::class.':IsLoggedIn')
+  })->add(RegistroMiddleware::class . ':guardarOperacion');/*->add(AuthMiddleware::class.':IsLoggedIn')
     ->add(RoleMiddleware::class.':IsAdmin')
     ->add(RegistroMiddleware::class . ':guardarOperacion')*/
 
