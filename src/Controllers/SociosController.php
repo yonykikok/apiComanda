@@ -81,7 +81,7 @@ class SociosController
       echo 'ingrese la orden a buscar';
     }
   }
-  public static function LiberarMesasCerradas()
+  public static function LiberarMesasCerradas($request,$response,$args)
   {
     $mesas = Mesa::get();
     if (count($mesas) > 0) {
@@ -91,9 +91,9 @@ class SociosController
           $mesa->save();
         }
       }
-      echo 'Mesas liberadas';
+      return $response->withJson('Mesas liberadas', 200);
     } else {
-      echo 'Todas las mesas estan libres';
+      return $response->withJson('Todas las mesas estan libres', 200);
     }
   }
   public static function CerrarMesa($request, $response, $args)
@@ -126,14 +126,12 @@ class SociosController
     $mesaMasUsada = self::BuscarMenorOMayor('mas', $lista, 'usos');
     $mesas = Mesa::where('usos', $mesaMasUsada->usos)->get();
     if (count($mesas) > 1) {
-      echo "<br>Las mesas mas usadas son: ";
-      foreach ($mesas as $indice => $mesa) {
-        echo "<br>" . $mesa->mesa . " con " . $mesa->usos . " usos";
-      }
-    } else {
+      return $response->withJson(json_encode($mesas), 200);
+    } else if (count($mesas) == 1) {
       return $response->withJson("La mesa mas usada es: " . $mesaMasUsada->mesa . " con " . $mesaMasUsada->usos . " usos", 200);
+    } else {
+      return $response->withJson("Aun no se registran usos", 200);
     }
-    return $response->withJson("Listado completo", 200);
   }
   public static function MesaMenosUsada($request, $response, $args)
   {
@@ -141,14 +139,12 @@ class SociosController
     $mesaMenos = self::BuscarMenorOMayor('menos', $lista, 'usos');
     $mesas = Mesa::where('usos', $mesaMenos->usos)->get();
     if (count($mesas) > 1) {
-      echo "<br>Las mesas menos usadas son: ";
-      foreach ($mesas as $indice => $mesa) {
-        echo "<br>" . $mesa->mesa . " con " . $mesa->usos . " usos";
-      }
-    } else {
+      return $response->withJson(json_encode($mesas), 200);
+    } else if (count($mesas) == 1) {
       return $response->withJson("La mesa menos usada es: " . $mesaMenos->mesa . " con " . $mesaMenos->usos . " usos", 200);
+    } else {
+      return $response->withJson("Aun no se registran usos", 200);
     }
-    return $response->withJson("Listado completo", 200);
   }
 
 
@@ -157,14 +153,10 @@ class SociosController
     $pedidosMozo = PedidoMozo::get();
     $pedidoConMayorFacturacion =  self::BuscarMenorOMayor('mas', $pedidosMozo, 'facturacion');
     $pedidosConIgualFacturacion = PedidoMozo::where('facturacion', $pedidoConMayorFacturacion->facturacion)->get();
-    if (count($pedidosConIgualFacturacion) >= 1) {
-      echo "<br>Las mesas con mayor facturacion son: ";
-      foreach ($pedidosConIgualFacturacion as $indice => $pedido) {
-        echo "<br>" . $pedido->mesa;
-      }
-      echo "<br> con un total de: $" . $pedido->facturacion;
+    if (count($pedidosConIgualFacturacion) > 1) {
+      return $response->withJson(json_encode($pedidosConIgualFacturacion), 200);
     } else {
-      return  $response->withJson("La mesa con factura mas alta fue: " . $pedido->mesa . " con un total de: " . $pedido->facturacion, 200);
+      return  $response->withJson("La mesa con factura mas alta fue: " . $pedidosConIgualFacturacion->mesa . " con un total de: " . $pedidosConIgualFacturacion->facturacion, 200);
     }
   }
   public static function FacturaMasBaja($request, $response, $args)
@@ -173,11 +165,7 @@ class SociosController
     $pedidoConMenosFacturacion =  self::BuscarMenorOMayor('menos', $pedidosMozo, 'facturacion');
     $pedidosConIgualFacturacion = PedidoMozo::where('facturacion', $pedidoConMenosFacturacion->facturacion)->get();
     if (count($pedidosConIgualFacturacion) > 1) {
-      echo "<br>Las mesas con menos facturacion son: ";
-      foreach ($pedidosConIgualFacturacion as $indice => $pedido) {
-        echo "<br>" . $pedido->mesa;
-      }
-      echo "<br> con un total de: $" . $pedido->facturacion;
+      return $response->withJson(json_encode($pedidosConIgualFacturacion), 200);
     } else {
       return  $response->withJson("La mesa con factura mas baja fue: " . $pedidoConMenosFacturacion->mesa . " con un total de: " . $pedidoConMenosFacturacion->facturacion, 200);
     }
@@ -212,13 +200,15 @@ class SociosController
   {
     $pedidos = PedidoMozo::get();
     $mesas = Mesa::get();
-    self::ObtenerFacturacionMayorOMenor($mesas, $pedidos, 'mayor');
+    $mesaDeMayorFacturacion = self::ObtenerFacturacionMayorOMenor($mesas, $pedidos, 'mayor');
+    return $response->withJson(json_encode($mesaDeMayorFacturacion), 200);
   }
   public static function PeorFacturacion($request, $response, $args)
   {
     $pedidos = PedidoMozo::get();
     $mesas = Mesa::get();
-    self::ObtenerFacturacionMayorOMenor($mesas, $pedidos, 'menor');
+    $mesaDeMenorFacturacion = self::ObtenerFacturacionMayorOMenor($mesas, $pedidos, 'menor');
+    return $response->withJson(json_encode($mesaDeMenorFacturacion), 200);
   }
   public static function ObtenerFacturacionMayorOMenor($mesas, $pedidos, $stringMayorOMenor)
   {
@@ -256,23 +246,24 @@ class SociosController
           break;
       }
     }
-    echo $mesaQueMasFacturo->mesa . '---' . $facturacionMasAlta . '<br>';
     return $mesaQueMasFacturo;
   }
   public static function MejoresComentarios($request, $response, $args)
   {
     $encuestas = Encuesta::where('puntuacionTotal', '>=', 32)->get();
-    foreach ($encuestas as $indice => $encuesta) {
-      echo '----------------------------------------------<br>';
-      Encuesta::MostrarEncuesta($encuesta);
+    if ($encuestas) {
+      return $response->withJson(json_encode($encuestas), 200);
+    } else {
+      return $response->withJson("Sin comentarios", 200);
     }
   }
   public static function PeoresComentarios($request, $response, $args)
   {
     $encuestas = Encuesta::where('puntuacionTotal', '<', 32)->get();
-    foreach ($encuestas as $indice => $encuesta) {
-      echo '----------------------------------------------<br>';
-      Encuesta::MostrarEncuesta($encuesta);
+    if ($encuestas) {
+      return $response->withJson(json_encode($encuestas), 200);
+    } else {
+      return $response->withJson("Sin comentarios", 200);
     }
   }
   public static function PedidosMasVendidos($request, $response, $args)
