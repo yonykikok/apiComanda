@@ -32,7 +32,7 @@ class SociosController
   public static function PedidosEsperandoCierre($request, $response, $args)
   {
     $mesas = Mozo::where('estado', 'cliente pagando')->get();
-    if ($mesas) {
+    if ($mesas && count($mesas) > 0) {
       return $response->withJson(json_encode($mesas, 200));
     }
     return $response->withJson("Sin cierres pendientes", 200);
