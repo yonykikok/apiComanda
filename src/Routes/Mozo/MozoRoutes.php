@@ -18,7 +18,7 @@ return function (App $app) {
         $this->post('/TomarFotografia', MozosController::class . ':TomarFotografia');
         $this->post('/CancelarPedido', MozosController::class . ':CancelarPedido');
         $this->post('/CambiarPedidoComida', MozosController::class . ':CambiarPedidoComida');
-    })->add(RegistroMiddleware::class . ':guardarOperacion');/*->add(AuthMiddleware::class.':IsLoggedIn')
+    });/*->add(AuthMiddleware::class.':IsLoggedIn')
 ->add(RoleMiddleware::class . ':esMozo')
 ->add(RegistroMiddleware::class . ':guardarOperacion');*/
 
