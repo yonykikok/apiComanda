@@ -18,9 +18,9 @@ return function(App $app)
     $this->post('/CerrarMesa', SociosController::class . ':CerrarMesa');
     $this->post('/LiberarMesas', SociosController::class . ':LiberarMesasCerradas');
     
-  })/*->add(AuthMiddleware::class.':IsLoggedIn')
+  })->add(RegistroMiddleware::class . ':guardarOperacion');/*->add(AuthMiddleware::class.':IsLoggedIn')
     ->add(RoleMiddleware::class.':IsAdmin')
-    ->add(RegistroMiddleware::class . ':guardarOperacion')*/; 
+    ->add(RegistroMiddleware::class . ':guardarOperacion')*/
 
   $app->group('/Socio/Administracion/Mesas', function()
   {
@@ -33,9 +33,9 @@ return function(App $app)
     $this->get('/FacturaMasAltaEntreFechas', SociosController::class . ':FacturaMasAltaEntreFechas');   
     $this->get('/MejoresComentarios', SociosController::class . ':MejoresComentarios');   
     $this->get('/PeoresComentarios', SociosController::class . ':PeoresComentarios');   
-  })/*->add(AuthMiddleware::class.':IsLoggedIn')  
+  })->add(RegistroMiddleware::class . ':guardarOperacion');/*->add(AuthMiddleware::class.':IsLoggedIn')  
     ->add(RoleMiddleware::class.':IsAdmin')
-    ->add(RegistroMiddleware::class . ':guardarOperacion')*/; 
+    ->add(RegistroMiddleware::class . ':guardarOperacion')*/
 
   $app->group('/Socio/Administracion/Pedidos', function()
   {
@@ -43,15 +43,15 @@ return function(App $app)
     $this->get('/MenosVendido', SociosController::class . ':PedidosMenosVendidos');   
     $this->get('/Atrasados', SociosController::class . ':PedidosAtrasados');   //no se hizo
     $this->get('/Cancelados', SociosController::class . ':PedidosCancelados');   
-  })/*->add(AuthMiddleware::class.':IsLoggedIn')
+  })->add(RegistroMiddleware::class . ':guardarOperacion');/*->add(AuthMiddleware::class.':IsLoggedIn')
   ->add(RoleMiddleware::class.':IsAdmin')
-  ->add(RegistroMiddleware::class . ':guardarOperacion')*/;
+  ->add(RegistroMiddleware::class . ':guardarOperacion')*/
 
     $app->group('/Socio/Administracion/Especial', function()
   {
     $this->get('/LimpiarBaseDeDatos', SociosController::class . ':LimpiarTodo');
-  })/*->add(AuthMiddleware::class.':IsLoggedIn')
+  })->add(RegistroMiddleware::class . ':guardarOperacion');/*->add(AuthMiddleware::class.':IsLoggedIn')
     ->add(RoleMiddleware::class.':IsAdmin')
-    ->add(RegistroMiddleware::class . ':guardarOperacion')*/; 
+    ->add(RegistroMiddleware::class . ':guardarOperacion')*/
 
 };

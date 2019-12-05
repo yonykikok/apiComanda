@@ -16,7 +16,7 @@ $app->group('/Cervecero',function(){
     $this->get('/enPreparacion',CerveceroController::class.':PedidosEnPreparacion');
     $this->post('/PrepararPedido/{orden}',CerveceroController::class.':PrepararPedido');
     $this->post('/TerminarPedido/{orden}',CerveceroController::class.':TerminarPedido');
-})/*->add(AuthMiddleware::class.':IsLoggedIn')
+})->add(RegistroMiddleware::class . ':guardarOperacion');/*->add(AuthMiddleware::class.':IsLoggedIn')
 ->add(RoleMiddleware::class . ':esCervecero')
-->add(RegistroMiddleware::class . ':guardarOperacion')*/;
+->add(RegistroMiddleware::class . ':guardarOperacion')*/
 };

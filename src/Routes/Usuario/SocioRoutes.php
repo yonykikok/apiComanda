@@ -15,7 +15,7 @@ return function(App $app)
     $this->post('/PorOrden', SociosController::class . ':VerPedidoPorOrden');    
     $this->post('/{nombre}',SociosController::class.':obtenerPedidosPorUsuario');
 
-  });//->add(AuthMiddleware::class.':IsLoggedIn')
+  })->add(RegistroMiddleware::class . ':guardarOperacion');//->add(AuthMiddleware::class.':IsLoggedIn')
     //-/>add(RoleMiddleware::class.':IsAdmin');
     // ->add(RegistroMiddleware::class . ':guardarOperacion'); 
 
