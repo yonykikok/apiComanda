@@ -81,7 +81,7 @@ class SociosController
       echo 'ingrese la orden a buscar';
     }
   }
-  public static function LiberarMesasCerradas($request,$response,$args)
+  public static function LiberarMesasCerradas($request, $response, $args)
   {
     $mesas = Mesa::get();
     if (count($mesas) > 0) {
@@ -156,7 +156,7 @@ class SociosController
     if (count($pedidosConIgualFacturacion) > 1) {
       return $response->withJson(json_encode($pedidosConIgualFacturacion), 200);
     } else {
-      return  $response->withJson("La mesa con factura mas alta fue: " . $pedidosConIgualFacturacion->mesa . " con un total de: " . $pedidosConIgualFacturacion->facturacion, 200);
+      return  $response->withJson("La mesa con factura mas alta fue: " . $pedidosConIgualFacturacion->mesa . " con un total de: $" . $pedidosConIgualFacturacion->facturacion + ",00", 200);
     }
   }
   public static function FacturaMasBaja($request, $response, $args)
@@ -167,7 +167,7 @@ class SociosController
     if (count($pedidosConIgualFacturacion) > 1) {
       return $response->withJson(json_encode($pedidosConIgualFacturacion), 200);
     } else {
-      return  $response->withJson("La mesa con factura mas baja fue: " . $pedidoConMenosFacturacion->mesa . " con un total de: " . $pedidoConMenosFacturacion->facturacion, 200);
+      return  $response->withJson("La mesa con factura mas baja fue: " . $pedidoConMenosFacturacion->mesa . " con un total de: $" . $pedidoConMenosFacturacion->facturacion + ",00", 200);
     }
   }
 
@@ -284,14 +284,20 @@ class SociosController
     $postres = Postre::where('cantidadVendida', '=', $postreMasVendida->cantidadVendida)->get();
     $comidas = Comida::where('cantidadVendida', '=', $comidaMasVendida->cantidadVendida)->get();
 
-    echo '<h3> Bebidas</h3>';
-    self::MostrarNombreYCantidad($bebidas, 'nombre', 'cantidadVendida');
-    echo '<h3> Tragos</h3>';
-    self::MostrarNombreYCantidad($tragos, 'nombre', 'cantidadVendida');
-    echo '<h3> Comidas</h3>';
-    self::MostrarNombreYCantidad($comidas, 'nombre', 'cantidadVendida');
-    echo '<h3> Postres</h3>';
-    self::MostrarNombreYCantidad($postres, 'nombre', 'cantidadVendida');
+    $retorno = [];
+    $retorno['bebidas'] = $bebidas;
+    $retorno['tragos'] = $tragos;
+    $retorno['comidas'] = $comidas;
+    $retorno['postres'] = $postres;
+    return $response->withJson(json_encode($retorno), 200);
+    // echo '<h3> Bebidas</h3>';
+    // self::MostrarNombreYCantidad($bebidas, 'nombre', 'cantidadVendida');
+    // echo '<h3> Tragos</h3>';
+    // self::MostrarNombreYCantidad($tragos, 'nombre', 'cantidadVendida');
+    // echo '<h3> Comidas</h3>';
+    // self::MostrarNombreYCantidad($comidas, 'nombre', 'cantidadVendida');
+    // echo '<h3> Postres</h3>';
+    // self::MostrarNombreYCantidad($postres, 'nombre', 'cantidadVendida');
   }
   public static function MostrarNombreYCantidad($lista, $campoNombre, $campoCantidad)
   {
@@ -319,15 +325,14 @@ class SociosController
     $postres = Postre::where('cantidadVendida', '=', $postreMenosVendida->cantidadVendida)->get();
     $comidas = Comida::where('cantidadVendida', '=', $comidaMenosVendida->cantidadVendida)->get();
 
-    echo '<h3> Bebidas</h3>';
-    self::MostrarNombreYCantidad($bebidas, 'nombre', 'cantidadVendida');
-    echo '<h3> Tragos</h3>';
-    self::MostrarNombreYCantidad($tragos, 'nombre', 'cantidadVendida');
-    echo '<h3> Comidas</h3>';
-    self::MostrarNombreYCantidad($comidas, 'nombre', 'cantidadVendida');
-    echo '<h3> Postres</h3>';
-    self::MostrarNombreYCantidad($postres, 'nombre', 'cantidadVendida');
+    $retorno = [];
+    $retorno['bebidas'] = $bebidas;
+    $retorno['tragos'] = $tragos;
+    $retorno['comidas'] = $comidas;
+    $retorno['postres'] = $postres;
+    return $response->withJson(json_encode($retorno), 200);
   }
+
   public static function LimpiarTodo($request, $response, $args)
   {
     try {
