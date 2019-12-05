@@ -150,24 +150,22 @@ class SociosController
 
   public static function FacturaMasAlta($request, $response, $args)
   {
-    $pedidosMozo = PedidoMozo::get();
-    $pedidoConMayorFacturacion =  self::BuscarMenorOMayor('mas', $pedidosMozo, 'facturacion');
-    $pedidosConIgualFacturacion = PedidoMozo::where('facturacion', $pedidoConMayorFacturacion->facturacion)->get();
-    if (count($pedidosConIgualFacturacion) > 1) {
-      return $response->withJson(json_encode($pedidosConIgualFacturacion), 200);
+    $pedidoConMayorFacturacion = PedidoMozo::where('facturacion', PedidoMozo::max('facturacion'))->get();
+
+    if (count($pedidoConMayorFacturacion) > 1) {
+      return $response->withJson(json_encode($pedidoConMayorFacturacion), 200);
     } else {
-      return  $response->withJson("La mesa con factura mas alta fue: " . $pedidosConIgualFacturacion->mesa . " con un total de: $" . $pedidosConIgualFacturacion->facturacion + ",00", 200);
+      return  $response->withJson("La mesa con factura mas alta fue: " . $pedidoConMayorFacturacion[0]->mesa . " con un total de: $" . $pedidoConMayorFacturacion[0]->facturacion, 200);
     }
   }
   public static function FacturaMasBaja($request, $response, $args)
   {
-    $pedidosMozo = PedidoMozo::get();
-    $pedidoConMenosFacturacion =  self::BuscarMenorOMayor('menos', $pedidosMozo, 'facturacion');
-    $pedidosConIgualFacturacion = PedidoMozo::where('facturacion', $pedidoConMenosFacturacion->facturacion)->get();
-    if (count($pedidosConIgualFacturacion) > 1) {
-      return $response->withJson(json_encode($pedidosConIgualFacturacion), 200);
+    $pedidoConMayorFacturacion = PedidoMozo::where('facturacion', PedidoMozo::min('facturacion'))->get();
+
+    if (count($pedidoConMayorFacturacion) > 1) {
+      return $response->withJson(json_encode($pedidoConMayorFacturacion), 200);
     } else {
-      return  $response->withJson("La mesa con factura mas baja fue: " . $pedidoConMenosFacturacion->mesa . " con un total de: $" . $pedidoConMenosFacturacion->facturacion + ",00", 200);
+      return  $response->withJson("La mesa con factura mas baja fue: " . $pedidoConMayorFacturacion[0]->mesa . " con un total de: $" . $pedidoConMayorFacturacion[0]->facturacion, 200);
     }
   }
 
