@@ -65,6 +65,7 @@ class AuthController
       $user->nombre = $data->nombre;
       $user->clave = password_hash($data->clave, PASSWORD_DEFAULT);
       $user->role = $data->role;
+      $user->imagen = $data->imagen;
 
       $user->save();
       return self::LogIn($request, $response, $args);
