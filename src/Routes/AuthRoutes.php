@@ -9,6 +9,7 @@ return function(App $app)
   {
     $this->post('/login', AuthController::class . ':LogIn');
     $this->get('/getInfoByToken', AuthController::class . ':getInfoByToken');
+    $this->get('/obtenerUsuario/{nombre}', AuthController::class . ':obtenerUsuario');
     $this->post('/register', AuthController::class . ':Register');
   });
 

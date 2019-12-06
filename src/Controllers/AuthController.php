@@ -18,10 +18,20 @@ class AuthController
       return $response->withJson($info);
     }
   }
+
+  public static function obtenerUsuario($request, $response, $args)
+  {
+    $usuario = User::where('nombre', $args['nombre'])->first();
+    if ($usuario) {
+      return $response->withJson(json_encode($usuario),200);
+    }
+    return $response->withJson("User not found",200);
+
+  }
   public static function LogIn($request, $response, $args)
   {
     $data = json_decode($request->getBody());
- 
+
     if (!isset($data->nombre) || !isset($data->clave))
       return $response->withJson("ingrese nombre/clave", 400);
 
@@ -38,7 +48,8 @@ class AuthController
     $obj = [
       "id" => $user->id,
       "nombre" => $user->nombre,
-      "role" => $user->role
+      "role" => $user->role,
+      "imagen" => $user->imagen
     ];
 
     $registro = new RegistroLogeo();
