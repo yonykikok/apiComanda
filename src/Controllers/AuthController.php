@@ -22,7 +22,7 @@ class AuthController
   public static function obtenerUsuario($request, $response, $args)
   {
     $usuario = User::where('nombre', $args['nombre'])->first();
-    if ($usuario) {
+    if ($usuario) { 
       return $response->withJson(json_encode($usuario),200);
     }
     return $response->withJson("User not found",200);
